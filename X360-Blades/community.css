@@ -1,0 +1,206 @@
+@font-face {font-family:"NXE Convection";src:url(data:font/woff2;base64,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) format("woff2");font-weight:400;font-style:normal;}
+html { background: transparent !important; }
+body, body.flat_page, body.profile_page { background: transparent !important; }
+body, body *:not(i):not([class*="icon"]) { font-family: "NXE Convection", "Segoe UI", sans-serif !important; }
+#global_header, #footer, #footer_spacer, .responsive_header, .responsive_page_content_overlay { display: none !important; }
+.responsive_page_frame, .responsive_page_content, .responsive_page_template_content, .pagecontent, .profile_page,
+.no_header.profile_page, .profile_content, .profile_content.has_profile_background { background: transparent !important; background-image: none !important; }
+.profile_header_bg, .profile_header_bg_texture, .profile_header {
+  background: linear-gradient(#ffffff2e, #00000059) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 0 0 1px #ffffff4d, 0 4px 12px #00000080 !important;
+}
+.profile_header_bg { margin: 10px !important; }
+.playerAvatar, .profile_avatar_frame { border-radius: 4px !important; }
+.playerAvatar { box-shadow: 0 0 0 2px #fff, 0 0 12px #b6e84a99 !important; }
+.actual_persona_name { color: #fff !important; text-shadow: 0 2px 3px #0008 !important; }
+.profile_header_badgeinfo, .profile_header_badge, .favorite_badge, .persona_level_btn {
+  background: #00000040 !important; border-radius: 6px !important; box-shadow: inset 0 0 0 1px #ffffff26 !important;
+}
+.friendPlayerLevel { border-color: #a9d43c !important; }
+.btn_profile_action > span, .btn_profile_action, .profile_header_actions .btn_medium > span, .btn_grey_black > span, .btnv6_blue_hoverfade > span, .btn_darkblue_white_innerfade > span {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px !important; text-shadow: none !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+.btn_profile_action:is(:hover, .gpfocus) > span, .btn_profile_action:is(:hover, .gpfocus), .btn_green_white_innerfade > span, .btn_green_steamui > span {
+  background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important;
+}
+.profile_in_game.persona.online .profile_in_game_header, .persona.online, .online { color: #c9f06a !important; }
+.profile_in_game.persona.offline .profile_in_game_header { color: #cfd6d9 !important; }
+.profile_item_links .profile_count_link, .profile_count_link_preview_ctn, .profile_customization, .profile_customization_block,
+.profile_recentgame_header, .recent_game, .recent_game_content, .profile_comment_area, .commentthread_area, .profile_leftcol .profile_customization,
+.showcase_content_bg, .favoritegame_showcase, .showcase_slot, .profile_group, .profile_topfriends, .responsive_count_link_area {
+  background: linear-gradient(#ffffff1f, #00000047) !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 0 0 1px #ffffff2e !important;
+}
+.profile_customization_header, .profile_recentgame_header, .profile_comment_title, .commentthread_header {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px 4px 0 0 !important;
+  text-transform: lowercase !important; letter-spacing: 0 !important; font-weight: 400 !important; box-shadow: inset 0 1px 0 #fff !important;
+}
+.profile_customization_header *, .profile_recentgame_header *, .commentthread_header * { color: #1c282e !important; }
+.profile_count_link_total, .count_link_label { color: #fff !important; }
+.gpfocus, a.gpfocus, .profile_count_link:hover { box-shadow: 0 0 0 3px #fff, 0 0 16px 3px #b6e84ad9 !important; outline: none !important; }
+a:hover, a.whiteLink:hover { color: #d8f58a !important; }
+::-webkit-scrollbar { width: 10px; background: #0000004d; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #f6f8f6, #b4bfc3); border-radius: 5px; }
+[data-x360-bg="glass"] {
+  background-color: #0a101438 !important;
+  background-image: none !important;
+}
+[data-x360-bg="plate"] {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  color: #1c282e !important;
+  border-radius: 4px !important;
+  text-shadow: none !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+[data-x360-bg="plate"] *, [data-x360-bg="plate"][data-x360-fg] { color: #1c282e !important; fill: #1c282e !important; }
+[data-x360-bg="plate"]:is(:hover, .gpfocus, :focus-visible) { background: linear-gradient(#a9d43c, #5a9612) !important; }
+[data-x360-bg="plate"]:is(:hover, .gpfocus, :focus-visible), [data-x360-bg="plate"]:is(:hover, .gpfocus, :focus-visible) * { color: #fff !important; fill: #fff !important; }
+[data-x360-fg="accent"] { color: #c9f06a !important; }
+.gpfocus, a.gpfocus, :focus-visible {outline:none !important;border-radius:4px !important;}
+:is(a,button,[role="button"]):focus-visible {box-shadow:0 0 0 2px #fff,0 0 12px #b6e84a99 !important;}
+:is(.capsule,.store_capsule,.game_capsule,.tab_item,.small_cap,.cluster_capsule):is(.gpfocus,:focus-visible), a.gpfocus:has(img) {border-radius:6px !important;}
+[data-x360-bg="bar"] :is(.gpfocus,:focus-visible) {box-shadow:none !important;outline:none !important;background:linear-gradient(#a9d43c,#5a9612) !important;color:white !important;border-radius:4px !important;}
+ [data-focusring="true"] {border-radius:6px !important;outline:none !important;box-shadow:none !important;}
+body { text-shadow: 0 1px 2px #000000a6; }
+[data-x360-fg="dim"] { color: #e3e9eb !important; }
+[data-x360-fg="accent"] { color: #d9f59a !important; }
+:is([data-x360-bg="bar"], [data-x360-bg="plate"], [data-x360-bg="drop"]),
+:is([data-x360-bg="bar"], [data-x360-bg="plate"], [data-x360-bg="drop"]) *,
+input, textarea, select, button { text-shadow: none !important; }
+:is([data-x360-bg="bar"], [data-x360-bg="plate"]):not(:hover, .gpfocus, :focus-visible) [data-x360-fg] { color: #1c282e !important; }
+.nav_item:is(.gpfocus, :focus-visible, :hover),
+[data-x360-bg="glass"]:is(a, button, [role="button"], [role="tab"], [role="menuitem"]):is(.gpfocus, :focus-visible):not(:has(img, video, picture)) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+  border-radius: 4px !important;
+}
+.nav_item:is(.gpfocus, :focus-visible, :hover), .nav_item:is(.gpfocus, :focus-visible, :hover) *,
+[data-x360-bg="glass"]:is(a, button, [role="button"], [role="tab"], [role="menuitem"]):is(.gpfocus, :focus-visible):not(:has(img, video, picture)),
+[data-x360-bg="glass"]:is(a, button, [role="button"], [role="tab"], [role="menuitem"]):is(.gpfocus, :focus-visible):not(:has(img, video, picture)) * { color: #fff !important; }
+.nav_item.active:not(.gpfocus, :focus-visible, :hover) { background: #ffffff2e !important; color: #fff !important; box-shadow: inset 0 1px 0 #ffffff40 !important; border-radius: 4px !important; }
+[data-x360-focus].gpfocus, [data-x360-hover]:hover {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+  border-radius: 4px !important;
+}
+[data-x360-focus].gpfocus, [data-x360-focus].gpfocus *, [data-x360-hover]:hover, [data-x360-hover]:hover * { color: #fff !important; fill: #fff !important; text-shadow: none !important; }
+[data-x360-bg="fill"] { background: linear-gradient(#b6e84a, #5a9612) !important; }
+:is(a, button)[class*="btn"] > span { background: none !important; box-shadow: none !important; border: 0 !important; }
+.showcase_content_bg:has(> .showcase_achievement) { display: flex !important; flex-wrap: wrap !important; gap: 16px 20px !important; padding: 14px !important; align-items: flex-start !important; }
+.showcase_content_bg:has(> .showcase_achievement) > .showcase_achievement { float: none !important; margin: 0 !important; flex: 0 0 64px !important; }
+.showcase_content_bg:has(> .showcase_achievement) > :not(.showcase_achievement) { flex: 0 0 100% !important; }
+.game_info_stats { border-radius: 4px !important; }
+.achievement_progress_bar_ctn { background: #0a0f1280 !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff26 !important; border-radius: 6px !important; }
+.game_info_achievement.plus_more { background: #ffffff26 !important; border-radius: 3px !important; }
+[data-x360-bg="backdrop"], .game_page_background { background-image: none !important; background-color: transparent !important; }
+:is([class*="btn_green"], [class*="btnv6_green"], .btn_addtocart, .btn_green_steamui, .btn_green_white_innerfade),
+:is([class*="btn_green"], [class*="btnv6_green"], .btn_addtocart, .btn_green_steamui, .btn_green_white_innerfade) * { color: #fff !important; text-shadow: 0 1px 1px #0006 !important; }
+.search_released, .search_reviewscore, .search_price_discount_combined .discount_original_price { color: #e3e9eb !important; }
+.page_content_ctn, .home_page_body_ctn, .page_content, #search_resultsRows, .pagecontent { padding-top: 10px !important; padding-bottom: 28px !important; box-sizing: border-box !important; }
+.addfunds_area_purchase_game, .game_area_purchase_game, .wallet_info, .block_content, .game_area_purchase_game_wrapper .game_area_purchase_game,
+.search_results_count, .steam_wallet_current, .wallet_balance_block, #wallet_balance_block { padding-left: 14px !important; padding-right: 14px !important; box-sizing: border-box !important; }
+:is([data-x360-focus].gpfocus, [data-x360-hover]:hover) :not(img, video, canvas, [data-x360-bg="plate"]) { background-color: transparent !important; }
+.gpfocus :is(a, button)[class*="btn"], :is(a, button)[class*="btn"]:is(.gpfocus, :focus-visible) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 0 0 2px #fff, 0 1px 3px #0006 !important;
+}
+.gpfocus :is(a, button)[class*="btn"], .gpfocus :is(a, button)[class*="btn"] *,
+:is(a, button)[class*="btn"]:is(.gpfocus, :focus-visible), :is(a, button)[class*="btn"]:is(.gpfocus, :focus-visible) * { color: #fff !important; }
+[data-x360-bg="chip"], [data-x360-bg="chip"] *,
+[data-x360-bg="bar"] :is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"],
+[data-x360-bg="bar"] :is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"] * { color: #1c282e !important; fill: #1c282e !important; text-shadow: none !important; }
+:is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"],
+[data-x360-bg="chip"]:is(a, button, [role="button"]):is(.gpfocus, :hover, :focus-visible) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+[data-x360-bg="bar"] :is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"]:not(#x),
+[data-x360-bg="bar"] :is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"]:not(#x) *,
+:is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"]:not(#x),
+:is(a, button, [role="button"], [role="menuitem"]):is(.gpfocus, :hover, :focus-visible) [data-x360-bg="chip"]:not(#x) *,
+[data-x360-bg="chip"]:is(a, button, [role="button"]):is(.gpfocus, :hover, :focus-visible):not(#x),
+[data-x360-bg="chip"]:is(a, button, [role="button"]):is(.gpfocus, :hover, :focus-visible):not(#x) * { color: #fff !important; fill: #fff !important; }
+:is([data-x360-focus].gpfocus, [data-x360-hover]:hover) [data-x360-bg="chip"]:not(#x) { background: linear-gradient(#f6f8f6, #c9d2d6) !important; }
+:is([data-x360-focus].gpfocus, [data-x360-hover]:hover) [data-x360-bg="chip"]:not(#x), :is([data-x360-focus].gpfocus, [data-x360-hover]:hover) [data-x360-bg="chip"]:not(#x) * { color: #1c282e !important; }
+.SteamChartsShell h1 { margin-top: 28px !important; margin-bottom: 14px !important; }
+
+/* x360: profile layout fixes */
+.profile_header_bg, .profile_header_bg_texture { background: none !important; box-shadow: none !important; border-radius: 0 !important; margin: 0 !important; }
+.profile_header_bg_texture { margin: 0 auto !important; }
+.profile_header { padding-bottom: 16px !important; margin-top: 10px !important; height: auto !important; }
+.profile_content {
+  margin-top: 10px !important;
+  background: linear-gradient(#ffffff14, #0000004d) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 0 0 1px #ffffff2e, 0 4px 12px #00000080 !important;
+}
+.profile_header_badgeinfo, .persona_level_btn { background: none !important; box-shadow: none !important; border-radius: 0 !important; }
+.profile_header_badge { padding: 8px 10px !important; box-sizing: border-box !important; }
+.favorite_badge { padding: 6px !important; }
+.responsive_count_link_area { padding: 8px 0 !important; box-sizing: border-box !important; }
+.responsive_count_link_area :is(.profile_badges, .profile_item_links, .profile_group_links) { margin-left: 0 !important; margin-right: 0 !important; }
+.profile_item_links .profile_count_link, .responsive_count_link_area .profile_count_link {
+  background: none !important; box-shadow: none !important;
+  padding: 3px 10px !important; margin: 0 0 2px !important; border-radius: 4px !important; box-sizing: border-box !important;
+}
+.profile_item_links .profile_count_link:hover, .responsive_count_link_area .profile_count_link:hover {
+  background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+.profile_count_link_preview_ctn { padding: 4px 6px 8px !important; box-sizing: border-box !important; }
+.responsive_count_link_area .profile_group { background: none !important; box-shadow: none !important; padding: 4px 10px !important; }
+.profile_in_game { padding-left: 10px !important; }
+.profile_badges .profile_count_link_preview { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
+.profile_badges .profile_badges_badge { margin: 0 !important; float: none !important; }
+/* x360: one box per right-column section, no nested panels */
+.profile_count_link_preview_ctn:not(.responsive_groupfriends_element),
+.profile_group, .profile_topfriends, .favorite_badge { background: none !important; box-shadow: none !important; }
+.responsive_groupfriends_element { padding: 10px !important; box-sizing: border-box !important; margin-top: 10px !important; }
+.responsive_groupfriends_element .profile_count_link { padding: 0 0 6px !important; }
+.responsive_groupfriends_element :is(.profile_group, .profile_topfriends) { padding: 0 !important; margin: 0 !important; width: auto !important; }
+.profile_topfriends .friendBlock { border-radius: 4px !important; padding: 4px !important; box-sizing: border-box !important; }
+.profile_topfriends .friendBlock:hover { background: linear-gradient(#a9d43c, #5a9612) !important; }
+.profile_header_badge { padding: 8px 10px !important; }
+.favorite_badge { padding: 0 !important; }
+/* animated profile backgrounds fill the whole page instead of stopping after one screen */
+.profile_animated_background { position: fixed !important; inset: 0 !important; width: auto !important; height: auto !important; overflow: hidden !important; z-index: 0 !important; }
+.profile_animated_background video { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; transform: none !important; }
+.profile_page .profile_content, .profile_page .profile_header_bg { position: relative; z-index: 1; }
+.responsive_groupfriends_element .profile_group { padding: 6px 0 0 76px !important; min-height: 64px !important; box-sizing: border-box !important; }
+/* x360: friends list rows grow to fit, one hover style for every section header */
+.profile_topfriends .friendBlock { height: auto !important; min-height: 48px !important; overflow: visible !important; }
+.profile_topfriends .friendBlockContent { white-space: normal !important; height: auto !important; overflow: visible !important; line-height: 1.25 !important; padding-bottom: 2px !important; }
+.profile_count_link:hover, div.profile_count_link:hover, .profile_count_link.gpfocus {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important; outline: none !important; border-radius: 4px !important;
+}
+.profile_count_link:hover *, .profile_count_link.gpfocus * { color: #fff !important; }
+/* x360: inventory controls */
+.inventory_rightnav :is(a, .btn_medium) > span, .inventory_rightnav :is(a, .btn_medium), #inventory_more_dropdown, .inventory_rightnav .btn_darkblue_white_innerfade {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px !important; text-shadow: none !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important; border: 0 !important;
+}
+.inventory_rightnav :is(a, .btn_medium):hover, .inventory_rightnav :is(a, .btn_medium):hover > span { background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; }
+.inventory_rightnav :is(a, .btn_medium) :is(span, img) { color: inherit !important; filter: none !important; }
+.games_list_tabs { background: #10181d40 !important; border-radius: 6px !important; padding: 4px !important; }
+.games_list_tab { border-radius: 4px !important; margin: 2px !important; }
+.games_list_tab:hover:not(.active) { background: #ffffff1f !important; }
+.games_list_tab.active { background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+.games_list_tab.active * { color: #fff !important; }
+#filter_control, .filter_search_box { background: #0d131873 !important; color: #fff !important; border-radius: 12px !important; border: 0 !important; box-shadow: inset 0 0 0 1px #ffffff40, inset 0 2px 3px #0006 !important; padding: 4px 10px !important; }
+.filter_tag_button_ctn, #filter_tag_show, #filter_tag_hide, .filter_tag_button_content {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px !important; border: 0 !important; text-shadow: none !important;
+}
+.filter_tag_button_ctn:hover, #filter_tag_show:hover { background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; }
+.itemHolder { background-color: #10181d59 !important; border-radius: 4px !important; box-shadow: inset 0 0 0 1px #ffffff1f !important; }
+.itemHolder:hover, .itemHolder.activeInfo, .item.activeInfo { box-shadow: 0 0 0 2px #fff, 0 0 10px #b6e84ad9 !important; }
+.inventory_page_left, .inventory_ctn { background: transparent !important; }
+/* x360: edit profile side navigation (tagged by web.js) */
+[data-x360-nav] > a { border-radius: 4px !important; text-decoration: none !important; }
+[data-x360-nav] > a:is(.active, :hover, :focus-visible) { background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+[data-x360-nav] a[href*="points"], [data-x360-nav] div > a[href*="points"] {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border: 0 !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}

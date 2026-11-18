@@ -1,0 +1,24 @@
+@import url("font.css");
+/* Xbox 360 Blades: applied to every Steam window while the theme is on. */
+
+/* NXE font everywhere instead of a global quick.css font */
+html *:not(i):not([class*="icon" i]):not(code):not(pre):not(kbd) {
+  font-family: "NXE Convection", "Segoe UI", sans-serif !important;
+}
+
+/* 360-style scrollbars: silver thumb in a dark glass track */
+html ::-webkit-scrollbar { width: 12px !important; height: 12px !important; background: transparent !important; }
+html ::-webkit-scrollbar-track { background: #0a0f1259 !important; border-radius: 6px !important; box-shadow: inset 0 1px 2px #0008 !important; margin: 4px !important; }
+html ::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #f6f8f6, #b4bfc3) !important;
+  border: 2px solid transparent !important; background-clip: padding-box !important;
+  border-radius: 6px !important; min-height: 40px !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+}
+html ::-webkit-scrollbar-thumb:horizontal { background: linear-gradient(#f6f8f6, #b4bfc3) !important; background-clip: padding-box !important; min-width: 40px !important; }
+html ::-webkit-scrollbar-thumb:hover { background: linear-gradient(90deg, #a9d43c, #5a9612) !important; background-clip: padding-box !important; }
+html ::-webkit-scrollbar-thumb:horizontal:hover { background: linear-gradient(#a9d43c, #5a9612) !important; background-clip: padding-box !important; }
+html ::-webkit-scrollbar-corner, html ::-webkit-scrollbar-button { background: transparent !important; display: none !important; }
+
+/* theme setting "Corners: Sharp" (desktop.js marks Steam's other windows with this class) */
+html.x360-sharp *, html.x360-sharp *::before, html.x360-sharp *::after { border-radius: 0 !important; }

@@ -1,0 +1,746 @@
+/* Xbox 360 Blades: desktop (non Big Picture) main window.
+   Everything is scoped to body.x360d, which desktop.js adds once the main window is ready. */
+
+body.x360d {
+  --u: calc(100vh / 900);
+  --step: calc(42 * var(--u));
+  --x360-left-count: 1;
+  --x360-right-count: 3;
+  --x360-left: calc(var(--x360-left-count) * var(--step) + 92 * var(--u));
+  --x360-right: calc(var(--x360-right-count) * var(--step) + 62 * var(--u));
+  --x360-titlebar: 32px;
+  --x360-head: calc(62 * var(--u));
+  --x360-font: "NXE Convection", "Segoe UI", sans-serif;
+  --x360-bg: url("blades-assets/blade_1_bgcolor.svg");
+  --x360-jewel: url("blades-assets/blade_1_jewel.svg");
+  --x360-plate: linear-gradient(#f6f8f6, #b4bfc3);
+  --x360-focus: linear-gradient(#a9d43c, #5a9612);
+  --x360-glass: linear-gradient(#e9eef01f, #10181d8c 22%, #10181d73);
+}
+body.x360d[data-blade="2"] { --x360-bg: url("blades-assets/blade_2_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_2_jewel.svg"); }
+body.x360d[data-blade="3"] { --x360-bg: url("blades-assets/blade_3_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_3_jewel.svg"); }
+body.x360d[data-blade="4"] { --x360-bg: url("blades-assets/blade_4_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_4_jewel.svg"); }
+body.x360d[data-blade="5"] { --x360-bg: url("blades-assets/blade_5_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_5_jewel.svg"); }
+
+body.x360d .OuterFrame,
+body.x360d .OuterFrame * { font-family: var(--x360-font) !important; }
+body.x360d .OuterFrame { position: relative !important; isolation: isolate; background: #20262a !important; }
+body.x360d .OuterFrame > :not(#x360-blades) { position: relative; z-index: 1; }
+
+/* ---------- blades ---------- */
+#x360-blades { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+#x360-blades[hidden] { display: none !important; }
+body.x360d #x360-blades { background: var(--x360-bg) center / 100% 100% no-repeat; }
+#x360-blades > button,
+#x360-blades > .x360-jewel {
+  position: absolute;
+  top: calc(-36 * 100vh / 770);
+  left: 0;
+  height: calc(940 * 100vh / 770);
+  width: calc(136 * var(--u));
+  margin: 0; padding: 0; border: 0; border-radius: 0; min-width: 0;
+  background: transparent center / 100% 100% no-repeat;
+  box-shadow: none; outline: none;
+  transform: translateX(calc(var(--slot, 0) * var(--step)));
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+#x360-blades > button {
+  z-index: 5;
+  background-image: url("blades-assets/blade_grey_left.svg");
+  color: #2c3a46;
+  font: 400 calc(23 * var(--u)) / 1 var(--x360-font);
+  pointer-events: auto;
+  cursor: pointer;
+}
+#x360-blades > button[data-side="right"] {
+  width: calc(161 * var(--u));
+  background-image: url("blades-assets/blade_grey_rt.svg");
+  transform: translateX(calc(100vw - var(--slot, 0) * var(--step) - 161 * var(--u)));
+}
+#x360-blades > button[data-side="open"] { visibility: hidden; pointer-events: none; }
+#x360-blades > .x360-jewel { z-index: 4; background-image: var(--x360-jewel); pointer-events: none; }
+/* the open blade's own tab, tinted like the real dashboard: a lighter strip with a dark label in the blade colour */
+/* the open blade: a white blade with the current background colour laid over it, like the original dashboard */
+body.x360d #x360-blades > .x360-jewel { background-image: url("blades-assets/blade_grey_left.svg") !important; }
+#x360-blades > .x360-jewel::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--x360-bg) center / 100% 100% no-repeat;
+  -webkit-mask: url("blades-assets/blade_open_left_mask.svg") center / 100% 100% no-repeat;
+  mask: url("blades-assets/blade_open_left_mask.svg") center / 100% 100% no-repeat;
+  mix-blend-mode: multiply;
+  opacity: .95;
+}
+#x360-blades > .x360-jewel span {
+  font: 400 calc(24 * var(--u)) / 1 var(--x360-font);
+  color: var(--x360-tab-ink, #00000099);
+  text-shadow: 0 1px 0 #ffffffd9;
+}
+body.x360d[data-blade="1"] { --x360-tab-ink: #6b3200; }
+body.x360d[data-blade="2"] { --x360-tab-ink: #1d5200; }
+body.x360d[data-blade="3"] { --x360-tab-ink: #0b2f70; }
+body.x360d[data-blade="4"] { --x360-tab-ink: #33176e; }
+body.x360d[data-blade="5"] { --x360-tab-ink: #6e1608; }
+#x360-blades > :is(button, .x360-jewel) span {
+  position: absolute;
+  left: 50%; top: 23%;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  text-transform: lowercase;
+  letter-spacing: .02em;
+  transform: translateX(-50%);
+  text-shadow: 0 1px 0 #ffffffb0;
+  pointer-events: none;
+}
+#x360-blades > button[data-x360-hot] span { color: #0c1319; text-shadow: 0 1px 0 #fff; }
+#x360-blades .x360-title {
+  position: absolute;
+  left: calc(var(--x360-left) + 14 * var(--u));
+  top: calc(var(--x360-titlebar) + 2 * var(--u));
+  font: 400 calc(46 * var(--u)) / 1 var(--x360-font);
+  text-transform: lowercase;
+  color: #fff;
+  text-shadow: 0 calc(2 * var(--u)) calc(4 * var(--u)) #0006;
+  white-space: nowrap;
+}
+
+/* gamercard (home blade), sits in the header strip next to the title */
+#x360-blades .x360-card {
+  position: absolute;
+  right: var(--x360-right);
+  top: calc(var(--x360-titlebar) + 2 * var(--u));
+  height: calc(var(--x360-head) - 8 * var(--u));
+  display: none;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  padding: calc(4 * var(--u)) calc(18 * var(--u)) calc(4 * var(--u)) calc(4 * var(--u));
+  box-sizing: border-box;
+  border-radius: calc(8 * var(--u));
+  background: linear-gradient(#f6f8f6, #c3ced2 60%, #aebbc0);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #ffffff99, 0 calc(3 * var(--u)) calc(8 * var(--u)) #00000073;
+  color: #1c282e;
+  font: 400 calc(19 * var(--u)) / 1.1 var(--x360-font);
+  pointer-events: auto;
+  cursor: pointer;
+}
+body.x360d[data-blade="1"] #x360-blades .x360-card:not([hidden]) { display: flex; }
+#x360-blades .x360-card img { height: 100%; aspect-ratio: 1; border-radius: calc(5 * var(--u)); box-shadow: 0 0 0 1px #6f7b82, 0 1px 3px #0006; object-fit: cover; }
+#x360-blades .x360-card-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+#x360-blades .x360-card-name { max-width: calc(240 * var(--u)); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#x360-blades .x360-card-status { margin-top: calc(4 * var(--u)); font-size: calc(14 * var(--u)); color: #4a5a63; display: flex; align-items: center; gap: calc(6 * var(--u)); }
+#x360-blades .x360-card-status::before { content: ""; width: calc(9 * var(--u)); height: calc(9 * var(--u)); border-radius: 50%; background: #8a979d; box-shadow: inset 0 1px 1px #fff8; }
+#x360-blades .x360-card-status:is([data-state="online"], [data-state="in-game"])::before { background: radial-gradient(circle at 50% 30%, #c9f06a, #5a9612); box-shadow: 0 0 calc(5 * var(--u)) #9ccc34; }
+#x360-blades .x360-card-status[data-state="away"]::before { background: #e3a712; }
+#x360-blades .x360-card-stats { margin-left: calc(14 * var(--u)); display: flex; gap: calc(22 * var(--u)); }
+#x360-blades .x360-card-stat { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
+#x360-blades .x360-card-stat[hidden] { display: none; }
+#x360-blades .x360-card-stat b { font-weight: 400; font-size: calc(24 * var(--u)); color: #1c282e; }
+#x360-blades .x360-card-stat span { margin-top: calc(3 * var(--u)); font-size: calc(12 * var(--u)); color: #4a5a63; }
+
+/* ---------- title bar: keep Steam's menus + window buttons, drop the Store/Library/Community row ---------- */
+body.x360d .TopBar { background: transparent !important; box-shadow: none !important; }
+body.x360d .SuperNavBar { display: none !important; }
+body.x360d .TitleBar:not(.title-area) {
+  padding-left: var(--x360-left) !important;
+  box-sizing: border-box !important;
+}
+/* line the right edge of the title bar buttons up with the gamercard and panel (the window buttons sit outside it) */
+body.x360d .TitleBarControls { margin-right: max(0px, round(var(--x360-right), 1px)) !important; }
+body.x360d .RootMenuBar { align-items: center !important; gap: 6px !important; }
+body.x360d .RootMenuBar .RootMenuButton {
+  height: 24px !important; margin: 5px 0 0 !important; padding: 0 10px !important;
+  display: flex !important; align-items: center !important; box-sizing: border-box !important;
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  border-radius: 4px !important;
+}
+body.x360d .RootMenuBar .RootMenuButton > * { margin: 0 !important; padding: 0 !important; }
+body.x360d .RootMenuBar .RootMenuButton :is(*, svg) { color: #1c282e !important; text-shadow: none !important; }
+body.x360d .RootMenuBar .RootMenuButton:is(:hover, .Active, :has(.Active)) {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+body.x360d .RootMenuBar .RootMenuButton:is(:hover, .Active, :has(.Active)) :is(*, svg) { color: #fff !important; }
+body.x360d .WindowControls {
+  position: absolute !important; top: 0 !important; right: 0 !important; z-index: 10 !important;
+  width: 32px !important; height: auto !important;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.x360d .WindowControls :is(.title-area, .title-bar-actions, .title-area-icon, .title-area-icon-inner) { background: none !important; box-shadow: none !important; }
+body.x360d .WindowControls .title-area-icon:hover { background: #ffffff1f !important; }
+body.x360d .WindowControls .closeButton:hover { background: #e81123 !important; }
+body.x360d .WindowControls .title-area { position: static !important; width: 32px !important; height: auto !important; }
+body.x360d .WindowControls .title-bar-actions { flex-direction: column !important; width: 32px !important; height: auto !important; margin: 0 !important; gap: 0 !important; }
+body.x360d .WindowControls .title-area-icon { width: 32px !important; height: 24px !important; flex: none !important; }
+body.x360d .WindowControls .minimizeButton { order: 1 !important; }
+body.x360d .WindowControls :is(.restoreButton, .maximizeButton) { order: 2 !important; }
+body.x360d .WindowControls .closeButton { order: 3 !important; }
+body.x360d .WindowControls .title-area-highlight, body.x360d .WindowControls .title-area-children { display: none !important; }
+body.x360d .TitleBarControls :is(.AccountMenu, .NotificationsButton, .AnnouncementsButton, .GamepadUIToggle) {
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  border-radius: 4px !important;
+  color: #1c282e !important;
+  transition: none !important;
+}
+body.x360d .TitleBarControls :is(.AccountMenu, .NotificationsButton, .AnnouncementsButton, .GamepadUIToggle) :is(*, svg) { color: #1c282e !important; text-shadow: none !important; }
+body.x360d .TitleBarControls :is(.AccountMenu, .NotificationsButton, .AnnouncementsButton, .GamepadUIToggle):hover {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+body.x360d .TitleBarControls :is(.AccountMenu, .NotificationsButton, .AnnouncementsButton, .GamepadUIToggle):hover :is(*, svg) { color: #fff !important; }
+body.x360d .TitleBarControls .AccountMenu .WalletBalance { color: #3a7a00 !important; }
+body.x360d .TitleBarControls .AccountMenu:hover .WalletBalance { color: #eaffc0 !important; }
+body.x360d .TitleBarControls .AccountMenu img { border-radius: 3px !important; }
+body.x360d .TitleBarControls :is(.AnnouncementWave, .AnnouncementWave *) { color: #3a7a00 !important; }
+
+/* ---------- main content: a glass panel between the blades ---------- */
+body.x360d .ContentFrame {
+  margin: round(var(--x360-head), 1px) round(var(--x360-right), 1px) 0 round(var(--x360-left), 1px) !important;
+  min-width: 0 !important;
+  border-radius: calc(14 * var(--u)) calc(14 * var(--u)) 0 0 !important;
+  overflow: hidden !important;
+  background: var(--x360-glass) !important;
+  box-shadow: inset 0 1px 0 #ffffff59, inset 0 0 0 1px #ffffff1f, 0 calc(4 * var(--u)) calc(14 * var(--u)) #00000059 !important;
+}
+body.x360d .BottomBarContainer {
+  margin: 0 round(var(--x360-right), 1px) round(calc(10 * var(--u)), 1px) round(var(--x360-left), 1px) !important;
+  min-width: 0 !important;
+}
+body.x360d .BottomBar {
+  background: linear-gradient(#10181d99, #10181dcc) !important;
+  border-radius: 0 0 calc(14 * var(--u)) calc(14 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff1a, 0 calc(4 * var(--u)) calc(10 * var(--u)) #00000059 !important;
+  border: 0 !important;
+}
+/* the resize grip stays in place (Steam sizes the window's resize corner from it), just invisible */
+body.x360d .BottomBar .window_resize_grip { opacity: 0 !important; }
+body.x360d .BottomBar :is(.AddGameButton, .FriendsButton, .DownloadStatusContent) {
+  height: 24px !important; box-sizing: border-box !important; padding: 0 10px !important;
+  display: flex !important; align-items: center !important; gap: 6px !important;
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  border-radius: 4px !important;
+  transition: none !important;
+}
+body.x360d .BottomBar :is(.AddGameButton, .FriendsButton, .DownloadStatusContent) :is(*, svg) { color: #1c282e !important; fill: currentColor; text-shadow: none !important; margin-top: 0 !important; }
+body.x360d .BottomBar :is(.AddGameButton, .FriendsButton, .DownloadStatusContent):hover {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+body.x360d .BottomBar :is(.AddGameButton, .FriendsButton, .DownloadStatusContent):hover :is(*, svg) { color: #fff !important; }
+body.x360d .BottomBar .DownloadStatus { background: transparent !important; }
+
+/* slide animation when switching blades */
+@keyframes x360-in-right { from { transform: translateX(6vw); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes x360-in-left { from { transform: translateX(-6vw); opacity: 0; } to { transform: none; opacity: 1; } }
+body.x360d[data-x360-slide="right"] :is(.LocalContentContainer, #x360-blades .x360-title, #x360-blades .x360-card) { animation: x360-in-right .28s cubic-bezier(.2, .7, .2, 1); }
+body.x360d[data-x360-slide="left"] :is(.LocalContentContainer, #x360-blades .x360-title, #x360-blades .x360-card) { animation: x360-in-left .28s cubic-bezier(.2, .7, .2, 1); }
+body.x360d[data-x360-slide="out"] .LocalContentContainer { opacity: 0 !important; transition: opacity .07s linear !important; }
+
+/* ---------- web pages (store / community): URL bar ---------- */
+body.x360d :is(.URLBarReplacement, .URLBar) { background: transparent !important; }
+body.x360d .URLBar { box-shadow: inset 0 -1px 0 #ffffff1f !important; padding: 4px 8px 4px 9px !important; min-height: 30px !important; box-sizing: border-box !important; }
+body.x360d .URLBar .URL { color: #e3e9eb !important; }
+body.x360d .URLBar :is(.URLBarText, .ReloadButton) { border-radius: 4px !important; transition: none !important; }
+body.x360d .URLBar :is(.URLBarText, .ReloadButton):hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .URLBar :is(.URLBarText, .ReloadButton):hover :is(*, .URL) { color: #fff !important; }
+
+/* ---------- library ---------- */
+body.x360d :is(.GameListHomeAndSearch, .AppDetailsTransitionGroup, .LibraryHome, .UpdatesContainer, .AllCollectionsContainer) {
+  background: transparent !important;
+}
+body.x360d .LeftListSizableContainer > .Container { background: #ffffff0d !important; box-shadow: inset -1px 0 0 #ffffff26 !important; }
+body.x360d .LibraryWindowDivider { background: #ffffff1f !important; }
+body.x360d .AppDetailsMain .ScrollContainer.Glassy { background: transparent !important; }
+body.x360d .AppDetailsMain > .Container { background: transparent !important; }
+
+/* home button + view dropdown + search field */
+body.x360d .HomeBox .Bar,
+body.x360d .GameListHomeAndSearch .CollectionBar,
+body.x360d .SearchBar .MenuHeader {
+  background: #ffffff1a !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff33 !important;
+  color: #fff !important;
+}
+body.x360d .HomeBox .Bar.Selected {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0006 !important;
+}
+body.x360d .HomeBox .Bar.Selected * { color: #fff !important; fill: #fff !important; }
+body.x360d :is(.HomeBox .Bar, .CollectionBar, .SearchBar .MenuHeader):hover { background: var(--x360-focus) !important; }
+body.x360d :is(.HomeBox .Bar, .CollectionBar, .SearchBar .MenuHeader):hover * { color: #fff !important; fill: #fff !important; }
+body.x360d .LeftListSizableContainer .SearchInput ~ .AdvancedSearchContainer,
+body.x360d .LeftListSizableContainer :has(> .SearchInput) {
+  background: #0d131873 !important;
+  border-radius: 16px !important;
+  box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important;
+}
+body.x360d .LeftListSizableContainer .SearchInput .DialogInput { background: transparent !important; color: #fff !important; }
+
+/* game list rows */
+body.x360d .Container:has(> .GameListEntryContainer) { border-radius: 3px !important; transition: none !important; }
+body.x360d .Container:has(> .GameListEntryContainer),
+body.x360d .Container:has(> .GameListEntryContainer) *:not(img) { background-color: transparent !important; box-shadow: none !important; }
+body.x360d .Container:has(> .GameListEntryContainer):is(:hover, .Selected) {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+body.x360d .Container:has(> .GameListEntryContainer):is(:hover, .Selected) > .GameListEntryContainer,
+body.x360d .Container:has(> .GameListEntryContainer):is(:hover, .Selected) > .GameListEntryContainer * { color: #fff !important; text-shadow: 0 1px 1px #0006 !important; }
+body.x360d .Container.Uninstalled > .GameListEntryContainer,
+body.x360d .Container.Uninstalled > .GameListEntryContainer * { color: #d5dde0 !important; }
+body.x360d .Container.Installed:not(.Selected) > .GameListEntryContainer { color: #fff !important; text-shadow: 0 1px 1px #0006; }
+body.x360d .CollapseIconParent { background: #ffffff14 !important; border-radius: 3px !important; }
+
+/* game tiles */
+body.x360d .LibraryItemBox {
+  box-shadow: 0 0 0 1px #ffffff59, 0 calc(4 * var(--u)) calc(10 * var(--u)) #00000080 !important;
+  border-radius: 3px !important;
+}
+body.x360d :is(.LibraryItemBox:hover, :hover > .LibraryItemBox, .Focusable:focus-visible .LibraryItemBox) {
+  box-shadow: 0 0 0 3px #fff, 0 0 calc(18 * var(--u)) calc(4 * var(--u)) #b6e84ad9 !important;
+}
+body.x360d .LibraryItemBoxShine { display: none !important; }
+body.x360d .RecentGameFooter { background: #10181dcc !important; }
+
+/* buttons */
+body.x360d .ContentFrame .DialogButton:not(.Disabled) {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  text-shadow: none !important;
+}
+body.x360d .ContentFrame .DialogButton:not(.Disabled) * { color: #1c282e !important; }
+body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible) {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible),
+body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible) * { color: #fff !important; }
+body.x360d :is(.PlayButton, .StreamingSelector) {
+  background: var(--x360-focus) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0008 !important;
+  text-shadow: 0 1px 1px #0006 !important;
+}
+body.x360d .PlayButton { border-radius: 4px 0 0 4px !important; }
+body.x360d .PlayButton:only-child { border-radius: 4px !important; }
+body.x360d .StreamingSelector { border-radius: 0 4px 4px 0 !important; }
+body.x360d :is(.PlayButton, .StreamingSelector):hover {
+  box-shadow: inset 0 1px 0 #d9f59a, 0 0 0 2px #fff, 0 0 calc(14 * var(--u)) #b6e84acc !important;
+}
+body.x360d .PlayBar .MenuButton {
+  background: var(--x360-plate) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+body.x360d .PlayBar .MenuButton svg { color: #1c282e !important; fill: currentColor; }
+body.x360d .PlayBar .MenuButton:hover { background: var(--x360-focus) !important; }
+body.x360d .PlayBar .MenuButton:hover svg { color: #fff !important; }
+body.x360d .AppDetailsMain * { text-transform: none !important; }
+body.x360d .PostTextEntryArea {
+  background: #ffffff14 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff26 !important;
+}
+
+/* ---------- 360 boot animation (first desktop window of a Steam session) ---------- */
+#x360-boot {
+  position: fixed; inset: 0; z-index: 100000; overflow: hidden;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 46%, #ffffff 0, #eef2f3 38%, #c9d2d6 100%);
+  transition: opacity .8s ease;
+  font-family: "NXE Convection", "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+#x360-boot.x360-boot-out { opacity: 0; pointer-events: none; }
+@keyframes x360-ribbon { 0% { transform: rotate(var(--from)) scale(2.6); opacity: 0; } 25% { opacity: .9; } 75% { opacity: .9; } 100% { transform: rotate(var(--to)) scale(.18); opacity: 0; } }
+#x360-boot .x360-boot-ribbon {
+  position: absolute; width: 70vh; height: 70vh; border-radius: 50%;
+  border: 2.2vh solid transparent; border-top-color: #9bc83a; border-right-color: #d8dee1;
+  filter: blur(.3vh); animation: x360-ribbon 2.4s cubic-bezier(.3, .1, .2, 1) both;
+}
+#x360-boot .r1 { --from: -140deg; --to: 220deg; }
+#x360-boot .r2 { --from: 60deg; --to: 400deg; border-top-color: #d8dee1; border-right-color: #7ab800; animation-delay: .18s; }
+#x360-boot .r3 { --from: 200deg; --to: 560deg; border-top-color: #b6e84a; border-right-color: #aeb9bd; animation-delay: .36s; }
+@keyframes x360-orb { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+#x360-boot .x360-boot-orb {
+  position: absolute; width: 26vh; height: 26vh; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 28%, #ffffff 0, #dfe5e7 30%, #9aa7ad 72%, #6c787e 100%);
+  box-shadow: 0 0 0 .6vh #ffffff, 0 0 6vh 1.5vh #b6e84acc, 0 2vh 4vh #0006, inset 0 -2vh 4vh #0003;
+  animation: x360-orb .9s cubic-bezier(.2, .9, .3, 1.2) 1.5s both;
+}
+#x360-boot .x360-boot-orb img {
+  width: 62%; height: 62%; object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(52%) sepia(86%) saturate(520%) hue-rotate(43deg) brightness(96%) drop-shadow(0 .3vh .2vh #0006);
+}
+@keyframes x360-word { from { opacity: 0; letter-spacing: 1.4em; } to { opacity: 1; letter-spacing: .32em; } }
+#x360-boot .x360-boot-word {
+  position: absolute; top: calc(50% + 19vh);
+  font-size: 5.2vh; color: #55626a; letter-spacing: .32em; text-indent: .32em;
+  animation: x360-word 1s ease 2.3s both;
+}
+#x360-boot .x360-boot-word span { color: #7ab800; }
+
+/* ---------- game page ---------- */
+/* the grey band behind play bar / tabs, and the sticky bar when scrolled */
+body.x360d .AppDetailsMain .BackdropGlass { background: linear-gradient(#10181d00 0, #10181d4d 90px, #10181d33 100%) !important; }
+body.x360d .AppDetailsMain .PlayBar.Glassy { background: transparent !important; }
+body.x360d .AppDetailsMain .StickyHeader .PlayBar.Glassy,
+body.x360d .AppDetailsMain .PlayBar.StickyHeader {
+  background: linear-gradient(#ffffff1f, #ffffff00 50%), #10181dcc !important;
+  box-shadow: inset 0 -1px 0 #ffffff33, 0 calc(4 * var(--u)) calc(10 * var(--u)) #00000059 !important;
+  -webkit-backdrop-filter: blur(6px) !important; backdrop-filter: blur(6px) !important;
+}
+body.x360d .AppDetailsMain .StickyHeader .PlayBar.Glassy { background: transparent !important; box-shadow: none !important; backdrop-filter: none !important; }
+body.x360d .AppDetailsMain .StickyHeaderShadow { display: none !important; }
+body.x360d .AppDetailsMain .ChooseButton {
+  display: inline-flex !important; align-items: center !important; height: 24px !important; padding: 0 10px !important;
+  background: var(--x360-plate) !important; color: #1c282e !important; text-decoration: none !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+body.x360d .AppDetailsMain .ChooseButton:hover { background: var(--x360-focus) !important; color: #fff !important; box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important; }
+
+/* side sections: achievements, notes, trading cards, dlc, friends who play */
+body.x360d .AppDetailsMain .AppDetailsSectionContainer {
+  background: #10181d47 !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important;
+}
+body.x360d .AppDetailsMain :is(.Highlight, .HighlightDiv, .BadgeSection, .HiddenLabel, .CardContainer) {
+  background: #10181d73 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff1f, inset 0 0 0 1px #ffffff12 !important;
+}
+body.x360d .AppDetailsMain .Grid.Background { background: #0a0f1280 !important; border-radius: 5px !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff26 !important; }
+
+/* activity feed, featured event, community items */
+body.x360d .AppDetailsMain :is(.PartnerEvent, .Event, .EventBody, .TopSectionInner, .ReviewContainer, .RatingContainer) {
+  background: #10181d59 !important;
+  border-radius: 6px !important;
+}
+body.x360d .AppDetailsMain .PartnerEventFeatured {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  padding: 0 2px 2px !important;
+  border-radius: 7px !important;
+  box-shadow: 0 calc(3 * var(--u)) calc(10 * var(--u)) #00000066 !important;
+}
+body.x360d .AppDetailsMain .PartnerEventFeatured > :not(.PartnerEventFeaturedHeader) { background: #10181dd9 !important; border-radius: 0 0 5px 5px !important; }
+body.x360d .AppDetailsMain .PartnerEventFeaturedHeader {
+  background: transparent !important;
+  color: #1c282e !important;
+  text-shadow: 0 1px 0 #fff !important;
+  font-size: 15px !important;
+}
+body.x360d .AppDetailsMain .PartnerEventFeaturedHeader * { color: #1c282e !important; }
+body.x360d .AppDetailsMain .SectionHeader.HeaderStyles { background: transparent !important; }
+body.x360d .AppDetailsMain .CommunityItem { background: #10181d73 !important; border-radius: 4px !important; box-shadow: inset 0 0 0 1px #ffffff1a !important; }
+body.x360d .AppDetailsMain :is(.BottomSection, .AuthorSection) { background: linear-gradient(#10181d00, #10181dcc) !important; }
+body.x360d .AppDetailsMain :is(.PostButton, .EmoticonPickerButton) { background: var(--x360-plate) !important; color: #1c282e !important; border-radius: 4px !important; }
+
+/* "would you recommend" prompt */
+body.x360d .AppDetailsMain .ReviewContainer { box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important; }
+body.x360d .AppDetailsMain .ReviewContainer .Playtime { color: #c9f06a !important; }
+body.x360d .AppDetailsMain .ReviewThumbButton {
+  background: var(--x360-plate) !important; color: #1c282e !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+body.x360d .AppDetailsMain .ReviewThumbButton :is(*, svg) { color: #1c282e !important; fill: currentColor; }
+body.x360d .AppDetailsMain .ReviewThumbButton:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important; }
+body.x360d .AppDetailsMain .ReviewThumbButton:hover :is(*, svg) { color: #fff !important; }
+
+/* scroll to top (full-width strip with the real button inside) */
+body.x360d .ScrollToTopButton { background: transparent !important; box-shadow: none !important; }
+body.x360d .ScrollToTopButton > div {
+  background: var(--x360-plate) !important; color: #1c282e !important; text-transform: lowercase !important; letter-spacing: 0 !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff, 0 2px 6px #0008 !important; border: 0 !important;
+}
+body.x360d .ScrollToTopButton > div:hover { background: var(--x360-focus) !important; color: #fff !important; box-shadow: inset 0 1px 0 #d9f59a, 0 2px 6px #0008 !important; }
+
+/* anything else dark and grey inside the library panel (tagged by desktop.js) */
+body.x360d [data-x360d="glass"] {
+  background: #10181d59 !important;
+  box-shadow: inset 0 1px 0 #ffffff1f, inset 0 0 0 1px #ffffff12 !important;
+  border-color: #ffffff1f !important;
+}
+
+/* ---------- friends column / friends page (games blade setting) ---------- */
+body.x360d[data-x360-games="friends"][data-blade="2"] .LocalContentContainer { visibility: hidden !important; }
+body.x360d[data-x360-games="friends+downloads"][data-blade="2"] .LocalContentContainer { margin-right: calc(290 * var(--u)) !important; width: auto !important; }
+#x360-friends { display: none; }
+body.x360d[data-blade="2"]:is([data-x360-games="friends"], [data-x360-games="friends+downloads"]) #x360-friends {
+  display: flex; flex-direction: column;
+  position: absolute; z-index: 3; top: 0; bottom: 0; right: 0;
+  width: calc(290 * var(--u)); box-sizing: border-box;
+  padding: calc(12 * var(--u)) calc(10 * var(--u));
+  background: #10181d73; box-shadow: inset 1px 0 0 #ffffff26;
+  overflow-y: auto; color: #fff;
+}
+body.x360d[data-x360-games="friends"][data-blade="2"] #x360-friends { left: 0; width: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(260 * var(--u)), 1fr)); align-content: start; gap: calc(6 * var(--u)) calc(12 * var(--u)); padding: calc(18 * var(--u)); background: transparent; box-shadow: none; }
+#x360-friends .x360-fr-head {
+  grid-column: 1 / -1;
+  font-size: calc(20 * var(--u)); margin: calc(8 * var(--u)) 0 calc(4 * var(--u));
+  text-transform: lowercase; color: #fff; text-shadow: 0 1px 2px #0008;
+  border-bottom: 1px solid #ffffff33; padding-bottom: calc(4 * var(--u));
+}
+#x360-friends .x360-fr {
+  display: flex; align-items: center; gap: calc(10 * var(--u));
+  padding: calc(5 * var(--u)); border-radius: 4px; cursor: pointer; min-width: 0;
+}
+#x360-friends .x360-fr:hover { background: var(--x360-focus); box-shadow: inset 0 1px 0 #d9f59a; }
+#x360-friends .x360-fr img { width: calc(40 * var(--u)); height: calc(40 * var(--u)); border-radius: 4px; flex: none; box-shadow: 0 0 0 2px #8a979d; }
+#x360-friends .x360-fr[data-state="online"] img { box-shadow: 0 0 0 2px #57cbde; }
+#x360-friends .x360-fr[data-state="ingame"] img { box-shadow: 0 0 0 2px #9ccc34; }
+#x360-friends .x360-fr-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#x360-friends .x360-fr-name { font-size: calc(16 * var(--u)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#x360-friends .x360-fr-status { font-size: calc(12.5 * var(--u)); color: #c9d2d6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#x360-friends .x360-fr[data-state="ingame"] .x360-fr-status { color: #c9f06a; }
+#x360-friends .x360-fr[data-state="offline"] { opacity: .6; }
+#x360-friends .x360-fr:hover .x360-fr-status { color: #fff; }
+#x360-friends .x360-fr-empty { grid-column: 1 / -1; color: #c9d2d6; font-size: calc(14 * var(--u)); padding: calc(6 * var(--u)) 0; }
+
+/* intro: nothing shows until it's finished */
+body.x360-booting .OuterFrame,
+body.x360-booting .MillenniumDesktopSidebar { visibility: hidden !important; }
+
+/* ---------- small library bits: collections button, address-bar refresh, downloads header ---------- */
+body.x360d .CollectionsButton .CollectionBar,
+body.x360d .URLBar .ReloadButton {
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  border-radius: 4px !important;
+}
+body.x360d .CollectionsButton .CollectionBar :is(*, svg),
+body.x360d .URLBar .ReloadButton :is(*, svg) { color: #1c282e !important; fill: currentColor; background: transparent !important; }
+body.x360d .CollectionsButton .CollectionBar:hover,
+body.x360d .URLBar .ReloadButton:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important; }
+body.x360d .CollectionsButton .CollectionBar:hover :is(*, svg),
+body.x360d .URLBar .ReloadButton:hover :is(*, svg) { color: #fff !important; }
+body.x360d .URLBar .ReloadButton { padding: 2px 6px !important; margin-right: 6px !important; }
+body.x360d .DownloadsPage .HeroAndLogo.Empty { background: linear-gradient(#ffffff1a, #10181d4d) !important; }
+
+/* ---------- dialogs shown inside the main window (change account, restore backup, confirmations, Millennium) ---------- */
+body.x360d .ModalOverlayBackground { background: #0a0f1299 !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  border-radius: 10px !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 0 4px 0 #7ab800, 0 10px 30px #000a !important;
+  color: #1c282e !important;
+}
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(h1, h2, .DialogHeader, .MainHeader, .SubHeader, .DialogBodyText, .FieldLabel, div, span, label) { color: #1c282e !important; text-shadow: none !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(.MainHeader, .DialogHeader) { text-transform: lowercase !important; font-weight: 400 !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) .SubHeader { color: #4a5a63 !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) .DialogButton:not(.Disabled):not(:disabled) {
+  background: linear-gradient(#ffffff, #cfd9dd) !important; color: #1c282e !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #81949c, 0 1px 2px #0005 !important;
+}
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) .DialogButton:not(.Disabled):not(:disabled):hover {
+  background: var(--x360-focus) !important; color: #fff !important; box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) .DialogButton:not(.Disabled):not(:disabled):hover * { color: #fff !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(.DialogButton.Disabled, .DialogButton:disabled) { background: #1c282e1f !important; color: #1c282e66 !important; box-shadow: none !important; }
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(input, textarea, .DialogInput, .DialogInputLabelGroup input) {
+  background: #f7faf8 !important; color: #1c282e !important; border: 0 !important; border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #81949c, inset 0 1px 3px #0002 !important;
+}
+body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(.closeButton, [class*="CloseButton"]) :is(*, svg) { color: #1c282e !important; }
+
+/* change account: the 360 "select profile" list of gamercards */
+body.x360d .CachedUsers .UserList { flex-direction: column !important; align-items: stretch !important; gap: 6px !important; width: 380px !important; margin: 0 auto !important; }
+body.x360d .CachedUsers .User {
+  flex-direction: row !important; align-items: center !important; justify-content: flex-start !important;
+  width: auto !important; height: 72px !important; gap: 12px !important; padding: 6px 12px 6px 6px !important; box-sizing: border-box !important;
+  background: linear-gradient(#ffffff, #d5dee1 60%, #c3ced2) !important;
+  border-radius: 6px !important; box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #81949c99, 0 2px 5px #0004 !important;
+  position: relative !important; cursor: pointer !important;
+}
+body.x360d .CachedUsers .User:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a, 0 2px 6px #0006 !important; }
+body.x360d .CachedUsers .User .Icon { width: 60px !important; height: 60px !important; flex: none !important; border-radius: 5px !important; overflow: hidden !important; background: #1c282e26 !important; box-shadow: 0 0 0 1px #6f7b82 !important; }
+body.x360d .CachedUsers .User .Icon img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+body.x360d .CachedUsers .User .Icon :is(svg, *) { color: #1c282e !important; }
+body.x360d .CachedUsers .User .Name { text-align: left !important; margin: 0 !important; width: auto !important; }
+body.x360d .CachedUsers .User .Name.Persona { font-size: 20px !important; color: #1c282e !important; }
+body.x360d .CachedUsers .User .Name.Account { font-size: 13px !important; color: #4a5a63 !important; }
+body.x360d .CachedUsers .User:hover :is(.Name, .Icon svg) { color: #fff !important; }
+body.x360d .CachedUsers .User .MoreMenuButton { position: absolute !important; right: 8px !important; top: 50% !important; transform: translateY(-50%) !important; }
+
+/* Millennium's own settings panel inside the main window: same look as Steam Settings */
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_PageListColumn {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, 4px 0 12px #0006 !important;
+}
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_Title { color: #1c282e !important; text-transform: lowercase !important; font-weight: 400 !important; text-shadow: 0 1px 0 #fff !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_PageListItem { background: transparent !important; color: #1c282e !important; border-radius: 4px !important; margin: 1px 10px 1px 8px !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_PageListItem :is(*, svg) { color: #33454e !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_PageListItem:is(:hover, .Active) { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog_PageListItem:is(:hover, .Active) :is(*, svg) { color: #fff !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) :is(.PagedSettingDialog_ContentColumn, .DialogContentTransition) { background: linear-gradient(#e9eef01f, #10181df2 22%, #10181de6) !important; }
+body.x360d .ModalPosition .PagedSettingsDialog { background: var(--x360-bg) center / 100% 100% no-repeat !important; border-radius: 10px !important; overflow: hidden !important; box-shadow: inset 0 0 0 1px #ffffff4d, 0 10px 30px #000a !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .Field.Background { background: #10181d59 !important; border-radius: 4px !important; box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogButton:not(.Disabled) { background: var(--x360-plate) !important; color: #1c282e !important; border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogButton:not(.Disabled) * { color: #1c282e !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogButton:not(.Disabled):hover { background: var(--x360-focus) !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogButton:not(.Disabled):hover,
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogButton:not(.Disabled):hover * { color: #fff !important; }
+
+/* Millennium library manager sidebar */
+body.x360d .MillenniumDesktopSidebar {
+  background: linear-gradient(260deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 4px 0 0 #7ab800, -6px 0 16px #0008 !important;
+  color: #1c282e !important;
+}
+body.x360d .MillenniumDesktopSidebar :is(.MillenniumDesktopSidebar_Title, .PanelSectionTitle) { background: transparent !important; color: #1c282e !important; text-transform: lowercase !important; text-shadow: 0 1px 0 #fff !important; }
+body.x360d .MillenniumDesktopSidebar :is(.MillenniumDesktopSidebar_Title, .PanelSectionTitle) * { color: #1c282e !important; }
+body.x360d .MillenniumDesktopSidebar .DialogButton {
+  background: linear-gradient(#ffffff, #cfd9dd) !important; color: #1c282e !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #81949c, 0 1px 2px #0005 !important;
+}
+body.x360d .MillenniumDesktopSidebar .DialogButton :is(*, svg) { color: #1c282e !important; }
+body.x360d .MillenniumDesktopSidebar .DialogButton:not(.Disabled):hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .MillenniumDesktopSidebar .DialogButton:not(.Disabled):hover :is(*, svg) { color: #fff !important; }
+body.x360d .MillenniumDesktopSidebar .DialogButton.Disabled { opacity: .55 !important; }
+body.x360d .MillenniumDesktopSidebar_Overlay { background: #0a0f1280 !important; }
+
+/* Millennium's panel opens inside the content panel: let the blade show through, and use the "system" blade colour */
+body.x360d .ContentFrame .PagedSettingsDialog { background: transparent !important; }
+body.x360d .ContentFrame :is(.PagedSettingDialog_ContentColumn, .DialogContentTransition) { background: #10181d4d !important; }
+body.x360d .ContentFrame .PagedSettingsDialog_PageContent { background: transparent !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDropDown, [class*="DropDownControlButton"]) {
+  background: var(--x360-plate) !important; color: #1c282e !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+}
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDropDown, [class*="DropDownControlButton"]) :is(*, svg) { color: #1c282e !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDropDown, [class*="DropDownControlButton"]):hover { background: var(--x360-focus) !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDropDown, [class*="DropDownControlButton"]):hover :is(*, svg) { color: #fff !important; }
+body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogInput { background: #0d131873 !important; color: #fff !important; border-radius: 4px !important; border: 0 !important; box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important; }
+body.x360d .CollectionsButton .CollectionBar .CollectionButton { background: transparent !important; }
+/* collections button: black squares on the green button gradient, inverted on hover */
+/* collections button: silver like every other button, Xbox green on hover */
+body.x360d .CollectionsButton .CollectionBar { background: var(--x360-plate) !important; box-shadow: inset 0 1px 0 #fff !important; }
+body.x360d .CollectionsButton .CollectionBar:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .CollectionsButton .CollectionBar .CollectionIconBox { background: #1c282e !important; border-radius: 1px !important; }
+body.x360d .CollectionsButton .CollectionBar:hover .CollectionIconBox { background: #fff !important; }
+/* the four squares, evenly spaced and centred */
+body.x360d .CollectionsButton .CollectionBar .CollectionIcon {
+  padding: 0 !important; width: 100% !important; height: 100% !important; box-sizing: border-box !important;
+  display: grid !important; grid-template: 9px 9px / 9px 9px !important; gap: 4px !important; place-content: center !important;
+}
+body.x360d .CollectionsButton .CollectionBar .CollectionIconBox { width: 9px !important; height: 9px !important; margin: 0 !important; }
+body.x360d .CollectionsButton .CollectionBar { width: 32px !important; height: 32px !important; box-sizing: border-box !important; }
+body.x360d .CollectionsButton .CollectionBar > a { margin: 0 !important; width: 100% !important; height: 100% !important; }
+/* breathing room between the Home bar and the collections button */
+body.x360d .GameListHomeAndSearch { gap: 6px !important; }
+body.x360d .GameListHomeAndSearch .HomeBox { flex: 1 1 auto !important; min-width: 0 !important; }
+body.x360d .GameListHomeAndSearch .CollectionsButton { margin-left: 0 !important; flex: none !important; }
+
+/* refresh icon centred in its button */
+body.x360d .URLBar .ReloadButton { display: flex !important; align-items: center !important; justify-content: center !important; width: 30px !important; height: 22px !important; padding: 0 !important; box-sizing: border-box !important; }
+body.x360d .URLBar .ReloadButton svg { padding: 0 !important; margin: 0 !important; height: 14px !important; width: 14px !important; }
+
+/* while Steam Settings is docked over the panel, nothing shows underneath it */
+body.x360d[data-x360-settings-open] .ContentFrame > * { visibility: hidden !important; }
+
+/* ===================== every button the same: silver plate, Xbox green on hover, no glow ===================== */
+/* play / install / update (and the small one in the sticky header) */
+body.x360d :is(.PlayButton, .StreamingSelector) {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+  text-shadow: none !important;
+}
+body.x360d :is(.PlayButton, .StreamingSelector) :is(*, svg) { color: #1c282e !important; text-shadow: none !important; }
+body.x360d :is(.PlayButton, .StreamingSelector) :is(.playTriangle, svg [fill]:not([fill="none"])) { fill: currentColor !important; }
+body.x360d :is(.PlayButton, .StreamingSelector):is(:hover, :focus-visible) {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+body.x360d :is(.PlayButton, .StreamingSelector):is(:hover, :focus-visible) :is(*, svg) { color: #fff !important; }
+
+/* Store Page / Community Hub / Discussions / Guides / Support */
+body.x360d .AppDetailsMain .LinksSection .Links .Link {
+  background: var(--x360-plate) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+}
+body.x360d .AppDetailsMain .LinksSection .Links .Link :is(*, svg) { color: #1c282e !important; opacity: 1 !important; }
+body.x360d .AppDetailsMain .LinksSection .Links .Link:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .AppDetailsMain .LinksSection .Links .Link:hover :is(*, svg) { color: #fff !important; }
+
+/* Home bar and the Games dropdown above the game list */
+body.x360d :is(.HomeBox .Bar, .GameListHomeAndSearch ~ * .SearchBar .MenuHeader, .LeftListSizableContainer .SearchBar .MenuHeader) {
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+  color: #1c282e !important;
+}
+body.x360d :is(.HomeBox .Bar, .GameListHomeAndSearch ~ * .SearchBar .MenuHeader, .LeftListSizableContainer .SearchBar .MenuHeader) :is(*, svg) { color: #1c282e !important; }
+body.x360d .HomeBox .Bar .Icon svg { opacity: .12 !important; }
+body.x360d :is(.HomeBox .Bar.Selected, .HomeBox .Bar:hover, .GameListHomeAndSearch ~ * .SearchBar .MenuHeader:hover, .LeftListSizableContainer .SearchBar .MenuHeader:hover) {
+  background: var(--x360-focus) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+body.x360d :is(.HomeBox .Bar.Selected, .HomeBox .Bar:hover, .GameListHomeAndSearch ~ * .SearchBar .MenuHeader:hover, .LeftListSizableContainer .SearchBar .MenuHeader:hover) :is(*, svg) { color: #fff !important; }
+body.x360d .HomeBox .Bar:is(.Selected, :hover) .Icon svg { opacity: .25 !important; }
+
+/* sort / ready-to-play toggles next to the dropdown */
+body.x360d .ViewFiltersBar .CheckboxWithImage {
+  width: 24px !important; height: 24px !important; box-sizing: border-box !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  background: var(--x360-plate) !important; border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff !important;
+  margin: 0 1px !important; color: #1c282e !important;
+}
+body.x360d .ViewFiltersBar .CheckboxWithImage svg { width: 16px !important; height: 16px !important; margin: 0 !important; color: inherit !important; }
+body.x360d .ViewFiltersBar .CheckboxWithImage svg :is([fill]:not([fill="none"]), path:not([fill]), polygon:not([fill]), rect:not([fill]), circle:not([fill])) { fill: currentColor !important; }
+body.x360d .ViewFiltersBar .CheckboxWithImage:is(.Active, :hover) { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; color: #fff !important; }
+
+/* featured event: one clean box, no blue hover edge, no dark slab under it */
+body.x360d .AppDetailsMain .PartnerEventFeatured,
+body.x360d .AppDetailsMain .PartnerEventFeatured:hover { border: 0 !important; outline: 0 !important; box-shadow: none !important; }
+body.x360d .AppDetailsMain .PartnerEventFeatured :is(*, *:hover) { outline: 0 !important; }
+body.x360d .AppDetailsMain :is(.Event, .Panel):has(> .Panel > .PartnerEventFeatured, > .PartnerEventFeatured) { background: transparent !important; box-shadow: none !important; }
+body.x360d .AppDetailsMain .AppDetailsSectionContainer:has(.PartnerEventFeatured) { background: transparent !important; box-shadow: none !important; }
+
+/* advanced search (filter) button beside the search field */
+body.x360d .AdvancedSearchContainer {
+  background: var(--x360-plate) !important; border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff !important;
+  width: 28px !important; height: 28px !important; align-self: center !important;
+}
+body.x360d .AdvancedSearchContainer :is(*, svg) { color: #1c282e !important; }
+body.x360d .AdvancedSearchContainer:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .AdvancedSearchContainer:hover :is(*, svg) { color: #fff !important; }
+body.x360d .AdvancedSearchContainer .AdvancedSearchButton { width: 100% !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+/* the links row floats on its own, no glass strip behind it */
+body.x360d .AppDetailsMain .LinksSection :is(.AppDetailsSectionContainer, .LinksSectionBody, .Links) { background: transparent !important; box-shadow: none !important; border: 0 !important; }
+
+/* game page: one box per thing, no stacked glass */
+/* Steam's blurred backdrop under the header runs halfway into the sections below it */
+body.x360d .AppDetailsMain .BackdropGlass { background: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+body.x360d .AppDetailsMain .AppGameInfoContainer > .Container { background: transparent !important; }
+/* one painted box per event: news posts paint the post itself (the wrapper around it is taller), other events paint the wrapper */
+body.x360d .AppDetailsMain .Event:has(.PartnerEvent):not(.PartnerEvent) { background: transparent !important; box-shadow: none !important; }
+body.x360d .AppDetailsMain :is(.PartnerEvent, .Event, .EventBody, .TopSectionInner, .ReviewContainer, .RatingContainer)
+  :is(.Event, .EventBody, .TopSectionInner, .ReviewContainer, .RatingContainer):not(.PartnerEvent) {
+  background: transparent !important; box-shadow: none !important;
+}
+/* downloads page: the page is the glass, sections inside it aren't painted again; queued items get their own glass row */
+body.x360d .DownloadsPage .Section { background: transparent !important; box-shadow: none !important; }
+body.x360d .DownloadsPage .SectionItem { background: #10181d59 !important; border-radius: 6px !important; box-shadow: inset 0 1px 0 #ffffff1a !important; }
+body.x360d .DownloadsPage .SectionItem:hover { background: #ffffff26 !important; box-shadow: inset 0 1px 0 #ffffff33, inset 0 0 0 1px #ffffff1f !important; }
+
+/* play / install button on library tiles (Recent Games, shelves) */
+body.x360d .LibraryItemActionButton {
+  background: var(--x360-plate) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+  color: #1c282e !important;
+}
+body.x360d .LibraryItemActionButton :is(svg, svg *) { color: #1c282e !important; }
+body.x360d .LibraryItemActionButton :is(.playTriangle, svg [fill]:not([fill="none"])) { fill: currentColor !important; }
+body.x360d .LibraryItemActionButton:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+body.x360d .LibraryItemActionButton:hover :is(svg, svg *) { color: #fff !important; }

@@ -1,0 +1,2 @@
+:root { --x360-corners: sharp; }
+*, *::before, *::after { border-radius: 0 !important; }

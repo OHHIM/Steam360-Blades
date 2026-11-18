@@ -1,0 +1,190 @@
+{
+  "name": "Xbox 360 Blades",
+  "author": "tameranian",
+  "description": "",
+  "version": "1.0.0",
+  "Patches": [
+    {
+      "MatchRegexString": "https://(store\\.steampowered|steamcommunity|help\\.steampowered)\\.com.*",
+      "TargetJs": "store.js"
+    },
+    {
+      "MatchRegexString": "https://steamcommunity\\.com.*",
+      "TargetCss": "community.css"
+    },
+    {
+      "MatchRegexString": "https://(store|help)\\.steampowered\\.com.*",
+      "TargetCss": "store.css"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "keyboard.css"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "achievements.css"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetCss": "font.css"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetCss": "glyphs.css"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetCss": "blades.css"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetCss": "guide.css"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetJs": "audio.js"
+    },
+    {
+      "MatchRegexString": "Steam Big Picture Mode|BasicUI|GamepadUI|notificationtoasts|Steam Overlay",
+      "TargetJs": "position.js"
+    },
+    {
+      "MatchRegexString": "Steam Big Picture Mode|BasicUI|GamepadUI|notificationtoasts|Steam Overlay",
+      "TargetJs": "xam-notify.js"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetJs": "blades.js"
+    },
+    {
+      "MatchRegexString": "^Steam Big Picture Mode$",
+      "TargetJs": "pages.js"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetCss": "font.css"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetCss": "desktop.css"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetJs": "audio.js"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetJs": "desktop.js"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "global.css"
+    },
+    {
+      "MatchRegexString": "Menu$|Supernav$|^Steam Settings$|^Friends List$",
+      "TargetJs": "menus.js"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "windows.css"
+    },
+    {
+      "MatchRegexString": "https://(store\\.steampowered|steamcommunity|help\\.steampowered)\\.com.*",
+      "TargetJs": "web.js"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetJs": "popups.js"
+    }
+  ],
+  "Conditions": {
+    "Games blade": {
+      "description": "What the third blade shows in the desktop (non Big Picture) client.",
+      "default": "All games",
+      "values": {
+        "All games": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/games-grid.css"
+          }
+        },
+        "Downloads": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/games-downloads.css"
+          }
+        },
+        "Friends": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/games-friends.css"
+          }
+        },
+        "Friends + Downloads": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/games-friends-downloads.css"
+          }
+        }
+      }
+    },
+    "Steam Settings window": {
+      "description": "How Steam Settings opens in the desktop client. Docked: opens over the panel as the system blade and stays above Steam (you can still move and resize it). Separate window: Steam's normal floating window.",
+      "default": "Docked",
+      "values": {
+        "Docked": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/settings-free.css"
+          }
+        },
+        "Separate window": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$"
+            ],
+            "src": "options/settings-off.css"
+          }
+        }
+      }
+    },
+    "Corners": {
+      "description": "Rounded or sharp corners on buttons, panels, menus and pages across the desktop client, its windows and the store/community pages.",
+      "default": "Rounded",
+      "values": {
+        "Rounded": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$",
+              "https://(store\\.steampowered|steamcommunity|help\\.steampowered)\\.com.*",
+              "https://steamcommunity\\.com.*",
+              "https://(store|help)\\.steampowered\\.com.*"
+            ],
+            "src": "options/corners-round.css"
+          }
+        },
+        "Sharp": {
+          "TargetCss": {
+            "affects": [
+              "^Steam$",
+              "https://(store\\.steampowered|steamcommunity|help\\.steampowered)\\.com.*",
+              "https://steamcommunity\\.com.*",
+              "https://(store|help)\\.steampowered\\.com.*"
+            ],
+            "src": "options/corners-sharp.css"
+          }
+        }
+      }
+    }
+  }
+}

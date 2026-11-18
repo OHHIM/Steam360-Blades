@@ -1,0 +1,292 @@
+/* Xbox 360 Blades: Steam's desktop popup menus, Settings window and Friends window. Loaded in every window,
+   but each block is scoped to that window's own html class. */
+
+/* ===================== popup / context menus ===================== */
+html.ContextMenuPopup .contextMenuContents {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 4px 0 0 #7ab800 !important;
+  padding: 4px 4px 4px 8px !important;
+  border-radius: 0 !important;
+  color: #1c282e !important;
+}
+html.ContextMenuPopup .contextMenuItem {
+  background: transparent !important;
+  color: #1c282e !important;
+  border-radius: 3px !important;
+  text-shadow: none !important;
+}
+html.ContextMenuPopup .contextMenuItem :is(*, svg) { color: inherit !important; text-shadow: none !important; }
+html.ContextMenuPopup .contextMenuItem:not(.disabled):is(:hover, .gpfocus, [class*="_18z-3vkWndCBO5WJgFldRK"]) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
+  color: #fff !important;
+}
+html.ContextMenuPopup .contextMenuItem.disabled,
+html.ContextMenuPopup .contextMenuItem.disabled * { color: #7f8c93 !important; }
+html.ContextMenuPopup :is(.contextMenuItem.Separator, .contextMenuItemHR, .Separator) {
+  height: 1px !important; min-height: 0 !important; padding: 0 !important;
+  margin: 4px 8px !important; border: 0 !important;
+  background: #7f9098 !important; box-shadow: 0 1px 0 #fff !important;
+}
+html.ContextMenuPopup .AccountMenuPopup :is(.WalletBalance, [class*="Balance"]) { color: #3a7a00 !important; }
+
+/* ===================== Steam Settings (the "system" blade) ===================== */
+html.MillenniumWindow_Settings body {
+  background: #20262a url("blades-assets/blade_4_bgcolor.svg") center / 100% 100% no-repeat !important;
+}
+html.MillenniumWindow_Settings .title-area-highlight { background: transparent !important; }
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListColumn {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, 4px 0 12px #0006 !important;
+}
+/* the green bar on the page list is the scrollbar's own track: thumb width plus 2px either side */
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListColumn ::-webkit-scrollbar { width: 12px !important; }
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListColumn ::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #a9d43c, #5a9612) !important;
+  border-radius: 6px !important; box-shadow: inset 0 1px 0 #d9f59a, inset 0 0 0 1px #3c6a0866 !important; margin: 4px !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListColumn ::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #f6f8f6, #b4bfc3) !important; background-clip: padding-box !important;
+  border: 2px solid transparent !important; border-radius: 6px !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_Title {
+  color: #1c282e !important; text-transform: lowercase !important; letter-spacing: 0 !important;
+  font-size: 28px !important; font-weight: 400 !important; text-shadow: 0 1px 0 #fff !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListItem {
+  background: transparent !important; color: #1c282e !important;
+  border-radius: 4px !important; margin: 1px 10px 1px 8px !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListItem :is(*, svg) { color: #33454e !important; fill: currentColor; }
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListItem:is(:hover, .Active, .gpfocus) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageListItem:is(:hover, .Active, .gpfocus) :is(*, svg) { color: #fff !important; }
+html.MillenniumWindow_Settings :is(.PagedSettingsDialog_PageList [class*="Separator"], .PagedSettingsDialog_PageListSeparator) { background: #7f9098 !important; opacity: .6; }
+html.MillenniumWindow_Settings :is(.PagedSettingDialog_ContentColumn, .PagedSettingsDialog_PageContent, .DialogContentTransition) {
+  background: linear-gradient(#e9eef01f, #10181d8c 22%, #10181d73) !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageContent { background: transparent !important; }
+html.MillenniumWindow_Settings .Field.Background,
+html.MillenniumWindow_Settings .FatButton {
+  background: #10181d59 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important;
+}
+html.MillenniumWindow_Settings .FatButton:hover { background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+html.MillenniumWindow_Settings .FatButton:hover * { color: #fff !important; }
+html.MillenniumWindow_Settings .DialogButton:not(.FatButton):not(.Disabled) {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  color: #1c282e !important; border-radius: 4px !important; text-shadow: none !important;
+  box-shadow: inset 0 1px 0 #fff !important;
+}
+html.MillenniumWindow_Settings .DialogButton:not(.FatButton):not(.Disabled) * { color: #1c282e !important; }
+html.MillenniumWindow_Settings .DialogButton:not(.FatButton):not(.Disabled):hover {
+  background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+html.MillenniumWindow_Settings .DialogButton:not(.FatButton):not(.Disabled):hover,
+html.MillenniumWindow_Settings .DialogButton:not(.FatButton):not(.Disabled):hover * { color: #fff !important; }
+html.MillenniumWindow_Settings :is(.DialogDropDown, [class*="DropDownControlButton"]) {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff !important;
+}
+html.MillenniumWindow_Settings :is(.DialogDropDown, [class*="DropDownControlButton"]) :is(*, svg) { color: #1c282e !important; }
+html.MillenniumWindow_Settings .DialogInput {
+  background: #0d131873 !important; color: #fff !important; border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important; border: 0 !important;
+}
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageContent :is(a, [class*="Link"]) { color: #c9f06a !important; }
+
+/* ===================== Friends & chat windows (the "community" blade colour) ===================== */
+html.friendsui-container body {
+  background: #20262a url("blades-assets/blade_3_bgcolor.svg") center / 100% 100% no-repeat !important;
+}
+html.friendsui-container :is(.title-area-highlight, .singleWindowFocusBar) { background: transparent !important; }
+html.friendsui-container :is(.friendListHeaderContainer, .titleBarContainer) { background: transparent !important; }
+html.friendsui-container :is(.FriendListInsetShadowTop, .FriendListInsetShadowBottom) { display: none !important; }
+html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle) {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px #0006 !important;
+  color: #1c282e !important; text-shadow: none !important;
+}
+html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle) :is(*, svg) { color: #1c282e !important; fill: currentColor; text-shadow: none !important; }
+html.friendsui-container :is(.friendlistListContainer, .chatRoomListContainer) {
+  background: #10181d59 !important;
+  box-shadow: inset 0 1px 0 #ffffff1f !important;
+}
+html.friendsui-container .friendGroup { background: transparent !important; }
+html.friendsui-container .friendGroup .groupName { color: #fff !important; text-transform: lowercase !important; text-shadow: 0 1px 2px #0008 !important; }
+html.friendsui-container .friend { border-radius: 4px !important; }
+html.friendsui-container .friend:hover {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+html.friendsui-container .friend:hover :is(*:not(img)) { color: #fff !important; }
+html.friendsui-container .friendListFooter { background: #10181d99 !important; box-shadow: inset 0 1px 0 #ffffff26 !important; }
+html.friendsui-container .quickAccessFriendsMessageDismiss { background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; }
+html.friendsui-container :is(.chatWindow, .ChatRoomGroupDialog, .chatDialogs, .chatHistory, .chatTabSetContainer, .ChatTabContent) { background: transparent !important; }
+html.friendsui-container :is(.chatEntry, .chatEntryControls) { background: #10181d73 !important; }
+html.friendsui-container :is(.chatTextarea, .chatentry_chatTextarea, textarea) {
+  background: #0d131873 !important; color: #fff !important; border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important; border: 0 !important;
+}
+/* readable persona colours on the blue blade background */
+html.friendsui-container :is(.playerName, .gameName, .richPresenceLabel, .SnoozeZ, .groupName, .currentUserContainer *) { text-shadow: 0 1px 2px #000a !important; }
+html.friendsui-container :is(.friend.online, .currentUserContainer.online) .playerName { color: #ffffff !important; }
+html.friendsui-container :is(.friend.online, .currentUserContainer.online) :is(.gameName, .richPresenceLabel, .SnoozeZ) { color: #d5e3ea !important; }
+html.friendsui-container .friend.online.awayOrSnooze .playerName { color: #e3e9eb !important; }
+html.friendsui-container .friend.online.awayOrSnooze :is(.gameName, .richPresenceLabel, .SnoozeZ) { color: #b9c8cf !important; }
+html.friendsui-container :is(.friend.ingame, .currentUserContainer.ingame) .playerName { color: #e4ffb0 !important; }
+html.friendsui-container :is(.friend.ingame, .currentUserContainer.ingame) .gameName { color: #c9f06a !important; }
+html.friendsui-container :is(.friend.ingame, .currentUserContainer.ingame) .richPresenceLabel { color: #b6d98a !important; }
+html.friendsui-container .friend.offline .playerName { color: #c3ccd1 !important; }
+html.friendsui-container .friend.offline :is(.gameName, .richPresenceLabel) { color: #9fadb4 !important; }
+html.friendsui-container .friend:hover :is(.playerName, .gameName, .richPresenceLabel, .SnoozeZ) { color: #fff !important; }
+html.friendsui-container :is(.quickAccessFriends, .quickAccessFriends *, .emptyFriendsListText, .chatRoomListContainer *) { color: #d5e3ea !important; border-color: #ffffff4d !important; }
+html.friendsui-container .chatRoomListContainer a { color: #fff !important; }
+
+/* ===================== more menu bits: friend menus, game sections, notifications ===================== */
+html.ContextMenuPopup .ContextMenuSeparator {
+  height: 1px !important; margin: 4px 8px !important; border: 0 !important;
+  background: #7f9098 !important; box-shadow: 0 1px 0 #fff !important;
+}
+html.ContextMenuPopup .contextMenuSectionContent { background: #10181d14 !important; border-radius: 3px !important; }
+html.ContextMenuPopup .contextMenuGameTitle {
+  background: linear-gradient(#3b464d, #1b2227) !important; border-radius: 3px !important; overflow: hidden !important;
+  box-shadow: inset 0 1px 0 #ffffff40 !important;
+}
+html.ContextMenuPopup .contextMenuGameTitle :is(.contextMenuGameName, *) { color: #fff !important; text-shadow: 0 1px 2px #000a !important; }
+html.ContextMenuPopup .contextMenuGameOptions:not(:hover) :is(*, svg) { color: #1c282e !important; }
+html.ContextMenuPopup .contextMenuPlayButton .SVGIcon_Play :is(circle, path, polygon) { stroke: currentColor !important; }
+html.ContextMenuPopup .SubMenu .Arrow :is(*, svg) { color: inherit !important; }
+html.ContextMenuPopup .NotificationsMenu,
+html.ContextMenuPopup .NotificationsMenu :is(.NotificationHeader, .NotificationsMenuScrollable, .PinnedTemplateDesktop, .NotificationsMenuEntriesContainer) { background: transparent !important; }
+html.ContextMenuPopup .NotificationsMenu :is(*:not(svg):not(path)) { color: #1c282e !important; text-shadow: none !important; }
+html.ContextMenuPopup .NotificationsMenu .AllNotificationsButton {
+  background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; border-radius: 4px !important;
+}
+
+/* ===================== settings: segmented choices, option cards, toggles, plain panels ===================== */
+html.MillenniumWindow_Settings .Shared_Radio_Group {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  border-radius: 4px !important; box-shadow: inset 0 1px 0 #fff !important; padding: 3px !important;
+}
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton {
+  background: transparent !important; color: #1c282e !important; border-radius: 3px !important; box-shadow: none !important;
+}
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton * { color: #1c282e !important; }
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton::before,
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton::after { background: #7f9098 !important; }
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton:is(.Active, :hover) {
+  background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
+}
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton:is(.Active, :hover),
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton:is(.Active, :hover) * { color: #fff !important; }
+html.MillenniumWindow_Settings :is(.RecordingModeOption, .FakeContainer) {
+  background: #10181d59 !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important;
+}
+html.MillenniumWindow_Settings .RecordingModeOption:is(.Active, :hover) {
+  background: #10181d8c !important; box-shadow: inset 0 1px 0 #ffffff33, inset 0 0 0 2px #a9d43c !important;
+}
+html.MillenniumWindow_Settings .Pip { background: linear-gradient(#ffffff, #cfd9dd) !important; border-color: #6f7b82 !important; box-shadow: inset 0 1px 2px #0004 !important; }
+html.MillenniumWindow_Settings .Pip.ActivePip { background: radial-gradient(circle, #5a9612 0 36%, #ffffff 42%) !important; border-color: #3c6a08 !important; }
+:is(html.MillenniumWindow_Settings, body.x360d) .Toggle .ToggleRail { background: #0a0f1280 !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff26 !important; }
+:is(html.MillenniumWindow_Settings, body.x360d) .Toggle.On .ToggleRail { background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
+:is(html.MillenniumWindow_Settings, body.x360d) .Toggle .ToggleSwitch { background: linear-gradient(#ffffff, #c3ced2) !important; box-shadow: 0 1px 2px #0008 !important; }
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageContent a,
+html.MillenniumWindow_Settings .PagedSettingsDialog_PageContent [class*="Link"] { color: #c9f06a !important; }
+:is(html.MillenniumWindow_Settings, body.x360d) .Toggle .ToggleRail::before { background: linear-gradient(#a9d43c, #5a9612) !important; }
+
+/* ===================== generic Steam dialogs (product code, add non-steam game, system report, about, news...) ===================== */
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) body {
+  --x360-pop-bg: url("blades-assets/blade_4_bgcolor.svg");
+  background: #20262a var(--x360-pop-bg) center / 100% 100% no-repeat !important;
+}
+html[data-x360-blade="1"]:not(.MillenniumWindow_Settings) body { --x360-pop-bg: url("blades-assets/blade_1_bgcolor.svg"); }
+html[data-x360-blade="2"]:not(.MillenniumWindow_Settings) body { --x360-pop-bg: url("blades-assets/blade_2_bgcolor.svg"); }
+html[data-x360-blade="3"]:not(.MillenniumWindow_Settings) body { --x360-pop-bg: url("blades-assets/blade_3_bgcolor.svg"); }
+html[data-x360-blade="5"]:not(.MillenniumWindow_Settings) body { --x360-pop-bg: url("blades-assets/blade_5_bgcolor.svg"); }
+html.ModalDialogPopup .title-area-highlight { background: transparent !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) :is(.DialogContent, .BrowserViewHost) {
+  background: linear-gradient(#e9eef01f, #10181d8c 22%, #10181d73) !important;
+}
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogHeader { color: #fff !important; text-transform: lowercase !important; font-weight: 400 !important; text-shadow: 0 2px 4px #0008 !important; letter-spacing: 0 !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) :is(.DialogBodyText, .DialogBody, label) { color: #e3e9eb !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogButton:not(.Disabled):not(:disabled) {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff !important; text-shadow: none !important;
+}
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogButton:not(.Disabled):not(:disabled) * { color: #1c282e !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogButton:not(.Disabled):not(:disabled):hover {
+  background: linear-gradient(#a9d43c, #5a9612) !important; box-shadow: inset 0 1px 0 #d9f59a !important;
+}
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogButton:not(.Disabled):not(:disabled):hover,
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogButton:not(.Disabled):not(:disabled):hover * { color: #fff !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) :is(.DialogButton.Disabled, .DialogButton:disabled) { background: #ffffff1a !important; color: #ffffff59 !important; box-shadow: none !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) :is(.DialogInput, textarea, input[type="text"]) {
+  background: #0d131873 !important; color: #fff !important; border: 0 !important; border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important;
+}
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) :is(.GameList, textarea, pre, [class*="SystemReport"], [class*="Scroll"]) { background-color: #10181d59 !important; border-radius: 4px !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .AddNonSteamGameDialog .Header {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; box-shadow: inset 0 1px 0 #fff !important;
+}
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .AddNonSteamGameDialog .Header * { color: #1c282e !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogCheckbox { background: linear-gradient(#ffffff, #cfd9dd) !important; border-radius: 3px !important; box-shadow: inset 0 0 0 1px #6f7b82, inset 0 1px 2px #0003 !important; }
+html.ModalDialogPopup:not(.MillenniumWindow_Settings) .DialogCheckbox:is(.Active, .Checked, [class*="Checked"]) { background: linear-gradient(#a9d43c, #5a9612) !important; }
+
+/* ===================== chat windows ===================== */
+html.friendsui-container :is(.ChatTabs, .titleBarContainer) { background: transparent !important; }
+html.friendsui-container .ChatTab { background: #10181d59 !important; border-radius: 4px 4px 0 0 !important; }
+html.friendsui-container .ChatTab.Active { background: linear-gradient(#f6f8f6, #b4bfc3) !important; box-shadow: inset 0 1px 0 #fff !important; }
+html.friendsui-container .ChatTab.Active .playerName { color: #1c282e !important; text-shadow: none !important; }
+html.friendsui-container .ChatTab.Active :is(.gameName, .richPresenceLabel) { color: #3a7a00 !important; text-shadow: none !important; }
+html.friendsui-container .ChatTab.Active svg { color: #1c282e !important; }
+html.friendsui-container :is(.chatDialogs, .chatWindow, .MultiUserChat) { background: #10181d40 !important; }
+html.friendsui-container :is(.chatEntry, .chatEntryControls, .chatEntryActionsGroup, .ChatMessageEntryVoice) { background: #10181d99 !important; }
+html.friendsui-container :is(.chatSubmitButton, .VoiceToggle, .inviteAnotherFriendButton) {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important; color: #1c282e !important; border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+html.friendsui-container :is(.chatSubmitButton, .VoiceToggle, .inviteAnotherFriendButton) :is(svg, *) { color: #1c282e !important; fill: currentColor; }
+html.friendsui-container :is(.chatSubmitButton, .VoiceToggle, .inviteAnotherFriendButton):not(.disabled):hover { background: linear-gradient(#a9d43c, #5a9612) !important; }
+html.friendsui-container :is(.chatSubmitButton, .VoiceToggle, .inviteAnotherFriendButton):not(.disabled):hover :is(svg, *) { color: #fff !important; }
+html.friendsui-container .chatSubmitButton.disabled { opacity: .6 !important; }
+html.friendsui-container .nameWidthLabel, html.friendsui-container .ChatSpeaker .speakerName { color: #e3e9eb !important; }
+html.friendsui-container .FriendChatTypingNotification { background: linear-gradient(to top, #10181dcc, transparent) !important; color: #d5e3ea !important; }
+html.friendsui-container [class*="ScrollToBottom"], html.friendsui-container .chatHistory span[class*="Scroll"] { background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; }
+html.friendsui-container :is(.msgText, .chatHistoryDivider, .ChatMessageBlock) { color: #f2f6f7 !important; }
+
+/* ===================== settings: segmented control text without the blue glow ===================== */
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton,
+html.MillenniumWindow_Settings .Shared_Radio_Group .RadioButton * { text-shadow: none !important; filter: none !important; }
+
+/* Steam Settings docked into the main window's panel (popups.js): no separate-window chrome */
+html.MillenniumWindow_Settings.x360-docked :is(.minimizeButton, .maximizeButton) { display: none !important; }
+html.MillenniumWindow_Settings.x360-docked body {
+  /* the same glass + blade background as the main window, offset so it lines up with what's around it */
+  background:
+    linear-gradient(#e9eef01f, #10181d8c 22%, #10181d73),
+    url("blades-assets/blade_4_bgcolor.svg") var(--x360-bgx, 0) var(--x360-bgy, 0) / var(--x360-bgw, 100%) var(--x360-bgh, 100%) no-repeat,
+    #20262a !important;
+}
+/* keep the grip element (Steam sizes its native resize corner from it), just invisible */
+html.MillenniumWindow_Settings.x360-locked .window_resize_grip { opacity: 0 !important; pointer-events: none !important; }
+html.MillenniumWindow_Settings.x360-locked :is(.title-area, .title-bar, .DragArea, [class*="TitleBar"]) { -webkit-app-region: no-drag !important; }
+html.MillenniumWindow_Settings.x360-docked .PagedSettingDialog_ContentColumn { background: transparent !important; }
+
+/* Settings > Family: member rows as glass rows, the "Me" tag in Xbox green */
+html.MillenniumWindow_Settings :is(.FamilyMemberRow, .InfoRow) {
+  background: #10181d59 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff26, inset 0 0 0 1px #ffffff14 !important;
+}
+html.MillenniumWindow_Settings .MeBadge {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  color: #fff !important;
+  border-radius: 3px !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+  text-shadow: 0 1px 1px #0006 !important;
+}
