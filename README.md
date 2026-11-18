@@ -31,18 +31,30 @@ This theme recreates the look and feel of the iconic Blades dashboard, bringing 
 ## Screenshots
 
 ### Marketplace
-<img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/9331ca0a-dbe9-4573-bdb0-c5036fb3f428" />
+
+<img width="1918" height="1079" alt="Marketplace" src="https://github.com/user-attachments/assets/9331ca0a-dbe9-4573-bdb0-c5036fb3f428" />
+
 ### Home
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/19b37404-5cff-44da-97f7-7fa4db51dcf4" />
+
+<img width="1919" height="1079" alt="Home" src="https://github.com/user-attachments/assets/19b37404-5cff-44da-97f7-7fa4db51dcf4" />
+
 ### Downloads / Friends / Combined / Games
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/6242406f-aa58-42cc-b39c-2dbf40eeddd0" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ac294991-29a7-457a-a9cd-35ce600445af" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/161d583a-c5a3-460f-a093-dbb060ac3116" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/e16a4581-5084-4b15-aae4-4f72f8262480" />
+
+<img width="1919" height="1079" alt="Downloads" src="https://github.com/user-attachments/assets/6242406f-aa58-42cc-b39c-2dbf40eeddd0" />
+
+<img width="1919" height="1079" alt="Friends" src="https://github.com/user-attachments/assets/ac294991-29a7-457a-a9cd-35ce600445af" />
+
+<img width="1919" height="1079" alt="Combined" src="https://github.com/user-attachments/assets/161d583a-c5a3-460f-a093-dbb060ac3116" />
+
+<img width="1919" height="1079" alt="Games" src="https://github.com/user-attachments/assets/e16a4581-5084-4b15-aae4-4f72f8262480" />
+
 ### Community
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/cff29823-64d9-490e-bf81-a61a6908daa0" />
+
+<img width="1919" height="1079" alt="Community" src="https://github.com/user-attachments/assets/cff29823-64d9-490e-bf81-a61a6908daa0" />
+
 ### Settings
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/78ad1573-cb42-45ce-90aa-9877961ca9d0" />
+
+<img width="1919" height="1079" alt="Settings" src="https://github.com/user-attachments/assets/78ad1573-cb42-45ce-90aa-9877961ca9d0" />
 
 
 ### Notes
