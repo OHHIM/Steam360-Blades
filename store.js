@@ -99,24 +99,24 @@
   document.addEventListener('mouseover', event => highlight(event.target?.closest?.('a, button, [role="button"], [role="menuitem"], [role="tab"], [role="option"], .Focusable, .tab, li'), 'data-x360-hover', ':hover'), true);
   const seen = new WeakSet();
   let queue = [], scheduled = false;
+  // each job keeps its own walker, so a big page that runs out of budget picks up exactly where it stopped
   function enqueue(root) {
     if (!root || root.nodeType !== 1) return;
-    queue.push(root);
+    queue.push({ walker: document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT), el: root });
     if (!scheduled) { scheduled = true; (window.requestIdleCallback || setTimeout)(drain, { timeout: 400 }); }
   }
   function drain(deadline) {
     scheduled = false;
     let budget = 600;
     while (queue.length && budget > 0 && (!deadline?.timeRemaining || deadline.timeRemaining() > 2 || deadline.didTimeout)) {
-      const root = queue.shift();
-      if (!root.isConnected) continue;
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
-      let el = root;
+      const job = queue.shift();
+      if (!job.walker.root.isConnected) continue;
+      let el = job.el;
       while (el && budget > 0) {
         if (!seen.has(el)) { seen.add(el); classify(el); budget--; }
-        el = walker.nextNode();
+        el = job.walker.nextNode();
       }
-      if (el) { queue.unshift(el); break; }
+      if (el) { job.el = el; queue.unshift(job); break; }
     }
     if (queue.length) { scheduled = true; (window.requestIdleCallback || setTimeout)(drain, { timeout: 400 }); }
   }

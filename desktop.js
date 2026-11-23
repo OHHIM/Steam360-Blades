@@ -24,7 +24,7 @@
     'grid': { label: 'games', path: '/library/collection/my-games' },
     'downloads': { label: 'downloads', path: '/library/downloads' },
     'friends': { label: 'friends', path: '/library/downloads' },
-    'friends+downloads': { label: 'friends', path: '/library/downloads' },
+    'friends+downloads': { label: 'social hub', path: '/library/downloads' },
   };
   function gamesMode() {
     const v = getComputedStyle(document.body).getPropertyValue('--x360-games').trim().replace(/["']/g, '');
@@ -53,6 +53,9 @@
       return -1;
     }
     if (/^\/library\/home/.test(path)) return HOME;
+    // collections belong to the games blade only when it is the games grid; in the friends and downloads
+    // modes ("Your collections" button) they open under home instead
+    if (/^\/library\/collections?(\/|$)/.test(path) && gamesMode() !== 'grid') return HOME;
     // a game's page stays under whichever library blade you opened it from
     if (/^\/library\/app\//.test(path)) return active === HOME || active === GAMES ? active : GAMES;
     if (/^\/library/.test(path)) return GAMES;
@@ -123,7 +126,7 @@
   }
   // theme setting "Corners": round (default) / sharp
   const sharpCorners = () => getComputedStyle(document.documentElement).getPropertyValue('--x360-corners').replace(/["'\s]/g, '') === 'sharp';
-  // theme setting "Steam Settings": locked (default) / free / off
+  // theme setting "Steam Settings window": docked ("free", the default) / separate window ("off")
   function settingsMode() {
     const v = getComputedStyle(document.body).getPropertyValue('--x360-settings').trim().replace(/["']/g, '');
     return v === 'off' ? 'off' : 'free';
@@ -153,7 +156,6 @@
       try {
         const r = dockRect();
         if (!r || !canDock()) return params;
-        const mode = settingsMode();
         delete params.center_on_window;
         const id = window.SteamClient?.Browser?.GetBrowserID?.();
         if (id) params.window_opener_id = id;
@@ -162,16 +164,15 @@
         params.dimensions = { width: r.width, height: r.height };
         // Steam places new windows from "restore details" exactly, unlike window.open's left/top
         params.strRestoreDetails = '1&x=' + r.x + '&y=' + r.y + '&w=' + r.width + '&h=' + r.height;
-        params.minWidth = mode === 'locked' ? r.width : Math.min(params.minWidth || 0, r.width);
-        params.minHeight = mode === 'locked' ? r.height : Math.min(params.minHeight || 0, r.height);
-        params.html_class = (params.html_class || '') + ' MillenniumWindow_Settings x360-docked' + (mode === 'locked' ? ' x360-locked' : '');
+        params.minWidth = Math.min(params.minWidth || 0, r.width);
+        params.minHeight = Math.min(params.minHeight || 0, r.height);
+        params.html_class = (params.html_class || '') + ' MillenniumWindow_Settings x360-docked';
       } catch { }
       return params;
     };
     document.body.setAttribute('data-x360-settings-open', '');
     setBrowserVisible(false);
   }
-  const owned = () => !window.__x360NoOwn;
   let popupBase = null, popupCreated = null;
   function hookPopups() {
     try {
@@ -189,19 +190,24 @@
           popupBase = o;
         }
       }
-      // theme every new window the moment it exists
-      if (!popupCreated) popupCreated = pm.AddPopupCreatedCallback(p => {
-        try {
-          const w = p.m_popup;
-          if (!w || w === window) return;
-          themePopup(w);
-          if (isSettingsPopup(p) && canDock()) {
-            const r = dockRect();
-            if (r) { try { w.SteamClient.Window.MoveTo(r.x, r.y, window.devicePixelRatio || 1); } catch { } }
-            dockSettings(w);
-          }
-        } catch { }
-      });
+      // theme every new window the moment it exists. Register once: Steam may not hand back a handle,
+      // and this runs every 400ms, so a missing handle must not mean "register again"
+      if (!popupCreated) {
+        const handle = pm.AddPopupCreatedCallback(p => {
+          if (stopped) return;
+          try {
+            const w = p.m_popup;
+            if (!w || w === window) return;
+            themePopup(w);
+            if (isSettingsPopup(p) && canDock()) {
+              const r = dockRect();
+              if (r) { try { w.SteamClient.Window.MoveTo(r.x, r.y, window.devicePixelRatio || 1); } catch { } }
+              dockSettings(w);
+            }
+          } catch { }
+        });
+        popupCreated = handle?.Unregister ? handle : true;
+      }
     } catch { }
   }
   function unhookPopups() {
@@ -213,41 +219,26 @@
     return popupWindows().find(w => { try { return /MillenniumWindow_Settings/.test(w.document.documentElement.className) || w.document.title === 'Steam Settings'; } catch { return false; } }) || null;
   }
   // Steam Settings is its own window: park it exactly over the dashboard panel so it reads as the "system" blade
-  async function dockSettings(w) {
+  function dockSettings(w) {
     try {
-      const doc = w.document, root = doc.documentElement, mode = settingsMode();
+      const root = w.document.documentElement;
       if (!canDock()) {
-        root.classList.remove('x360-docked', 'x360-locked');
+        root.classList.remove('x360-docked');
         return;
       }
       const r = dockRect();
       if (!r) return;
       const { x, y, width, height, frame } = r;
       root.classList.add('x360-docked');
-      root.classList.toggle('x360-locked', mode === 'locked');
       // line the blade background up with the main window around it
       root.style.setProperty('--x360-bgx', -Math.round(frame.left) + 'px');
       root.style.setProperty('--x360-bgy', -Math.round(frame.top) + 'px');
       root.style.setProperty('--x360-bgw', window.innerWidth + 'px');
       root.style.setProperty('--x360-bgh', window.innerHeight + 'px');
-      const win = w.SteamClient.Window;
-      if (mode === 'free') {
-        // dock once when it opens, then it's the user's to move and resize
-        if (!w.__x360Docked) { w.__x360Docked = true; win.ResizeTo(width, height, true); win.MoveTo(x, y, window.devicePixelRatio || 1); }
-        if (w.__x360Locked) { w.__x360Locked = false; try { win.SetMinSize(400, 300); win.SetMaxSize(16384, 16384); } catch { } }
-        return;
-      }
-      // locked: same size and place as the panel, always
-      const key = [width, height].join();
-      if (w.__x360Size !== key) {
-        w.__x360Size = key;
-        try { win.SetMinSize(width, height); win.SetMaxSize(width, height); } catch { }
-      }
-      if (!w.__x360Grip) { w.__x360Grip = true; try { win.SetResizeGrip(24, 24); } catch { } }
-      w.__x360Locked = true;
-      let now = null;
-      try { now = await win.GetWindowDimensions(); } catch { }
-      if (!now || now.x !== x || now.y !== y || now.width !== width || now.height !== height) {
+      // dock once when it opens, then it's the user's to move and resize
+      if (!w.__x360Docked) {
+        w.__x360Docked = true;
+        const win = w.SteamClient.Window;
         win.ResizeTo(width, height, true);
         win.MoveTo(x, y, window.devicePixelRatio || 1);
       }
@@ -386,7 +377,8 @@
     if (avatar && img.src !== avatar) img.src = avatar;
     card.hidden = !avatar && !name;
     card.querySelector('.x360-card-name').textContent = name;
-    const status = game ? 'in-game' : state === 1 ? 'online' : (state === 2 || state === 3 || state === 4) ? 'away' : state ? 'online' : 'offline';
+    // Steam persona states: 1 online, 2 busy, 3 away, 4 snooze, 5-6 looking to trade/play, 7 invisible
+    const status = game ? 'in-game' : state === 2 ? 'busy' : (state === 3 || state === 4) ? 'away' : state ? 'online' : 'offline';
     const statusEl = card.querySelector('.x360-card-status');
     statusEl.textContent = status;
     statusEl.dataset.state = status;
@@ -450,7 +442,7 @@
         game = game || p.m_strGameExtraInfo || 'a game';
       }
       const state = game ? 'ingame' : (p.is_online || p.m_ePersonaState > 0) ? 'online' : 'offline';
-      const away = [2, 3, 4].includes(p.m_ePersonaState);
+      const away = p.m_ePersonaState === 2 ? 'busy' : (p.m_ePersonaState === 3 || p.m_ePersonaState === 4) ? 'away' : '';
       let sid = '';
       try { sid = p.m_steamid?.ConvertTo64BitString?.() || ''; } catch { }
       return {
@@ -488,7 +480,7 @@
       html += '<div class="x360-fr-head">' + label + ' (' + list.length + ')</div>';
       if (!list.length) { html += '<div class="x360-fr-empty">nobody right now</div>'; continue; }
       for (const r of list) {
-        const status = r.state === 'ingame' ? 'playing ' + r.game : r.state === 'online' ? (r.away ? 'away' : 'online') : 'offline';
+        const status = r.state === 'ingame' ? 'playing ' + r.game : r.state === 'online' ? (r.away || 'online') : 'offline';
         html += '<div class="x360-fr" data-state="' + r.state + '" data-sid="' + esc(r.sid) + '" title="Message ' + esc(r.name) + '">' +
           '<img alt="" src="' + esc(r.avatar) + '"><div class="x360-fr-text"><div class="x360-fr-name">' + esc(r.name) + '</div>' +
           '<div class="x360-fr-status">' + esc(status) + '</div></div></div>';
@@ -519,13 +511,14 @@
     });
     for (let el = walker.nextNode(); el && budget > 0; el = walker.nextNode()) {
       if (tagged.has(el)) continue;
-      tagged.add(el);
       budget--;
       const c = firstColour(getComputedStyle(el));
-      if (!c || c.a < 0.5) continue;
-      const max = Math.max(c.r, c.g, c.b), min = Math.min(c.r, c.g, c.b);
-      if (max > 125 || max - min > 45 || c.r + c.g + c.b < 20) continue;
+      const max = c ? Math.max(c.r, c.g, c.b) : 0, min = c ? Math.min(c.r, c.g, c.b) : 0;
+      if (!c || c.a < 0.5 || max > 125 || max - min > 45 || c.r + c.g + c.b < 20) { tagged.add(el); continue; }
       const r = el.getBoundingClientRect();
+      // not drawn yet (collapsed, or not laid out): leave it unmarked so the next pass measures it again
+      if (!r.width && !r.height) continue;
+      tagged.add(el);
       if (r.width < 60 || r.height < 24) continue;
       el.setAttribute('data-x360d', 'glass');
     }
@@ -622,16 +615,6 @@
     else sound('x360_select.wav', 0.6);
   };
   const onBack = event => { if (event.button === 3) sound('x360_back.wav', 0.6); };
-  // clicking the main window would bury the docked Settings window behind it, so raise it again,
-  // but never while one of the title bar menus is open (raising it closes the menu)
-  const menuOpen = () => {
-    try {
-      return [...host.g_PopupManager.GetPopups()].some(p => {
-        try { return p.m_popup && /ContextMenuPopup/.test(p.m_popup.document.documentElement.className) && p.BIsVisible() && !p.BIsClosed(); } catch { return false; }
-      });
-    } catch { return false; }
-  };
-  let raiseTimer = 0;
   // ---- keep docked Settings above the main window, and the title bar dropdowns above Settings ----
   // Clicking the main window raises it over Settings. Raise Settings back without giving it focus
   // ("without forcing OS"), so a dropdown that is opening keeps focus, then lift any open dropdown on top.
@@ -662,20 +645,6 @@
     if (covered && document.hasFocus()) raiseSettingsQuietly();
   }
   const focusTimer = setInterval(keepSettingsOnTop, 150);
-  const menuTimer = 0;
-  const onFocus = () => {
-    clearTimeout(raiseTimer);
-    const attempt = (tries) => {
-      const w = settingsWindow();
-      if (!w || !document.body.hasAttribute('data-x360-settings-open')) return;
-      return; // handled by keepSettingsOnTop
-      if (menuOpen()) { if (tries < 200) raiseTimer = setTimeout(() => attempt(tries + 1), 150); return; }
-      if (!document.hasFocus()) return; // focus went to a menu, dialog or other window
-      try { w.SteamClient.Window.BringToFront(); } catch { }
-    };
-    raiseTimer = setTimeout(() => attempt(0), 250);
-  };
-  window.addEventListener('focus', onFocus);
   document.addEventListener('mouseover', onOver, true);
   document.addEventListener('click', onClick, true);
   document.addEventListener('mouseup', onBack, true);
@@ -711,12 +680,8 @@
     document.removeEventListener('mouseover', onOver, true);
     document.removeEventListener('click', onClick, true);
     document.removeEventListener('mouseup', onBack, true);
-    window.removeEventListener('focus', onFocus);
     clearInterval(focusTimer);
-    clearInterval(menuTimer);
     document.removeEventListener('mousedown', onMainDown, true);
-    clearTimeout(raiseTimer);
-    clearInterval(focusTimer);
     nav?.remove();
     friendsEl?.remove();
     document.body.classList.remove('x360d');

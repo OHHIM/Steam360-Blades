@@ -131,7 +131,7 @@ body.x360d[data-blade="1"] #x360-blades .x360-card:not([hidden]) { display: flex
 #x360-blades .x360-card-status { margin-top: calc(4 * var(--u)); font-size: calc(14 * var(--u)); color: #4a5a63; display: flex; align-items: center; gap: calc(6 * var(--u)); }
 #x360-blades .x360-card-status::before { content: ""; width: calc(9 * var(--u)); height: calc(9 * var(--u)); border-radius: 50%; background: #8a979d; box-shadow: inset 0 1px 1px #fff8; }
 #x360-blades .x360-card-status:is([data-state="online"], [data-state="in-game"])::before { background: radial-gradient(circle at 50% 30%, #c9f06a, #5a9612); box-shadow: 0 0 calc(5 * var(--u)) #9ccc34; }
-#x360-blades .x360-card-status[data-state="away"]::before { background: #e3a712; }
+#x360-blades .x360-card-status:is([data-state="away"], [data-state="busy"])::before { background: #e3a712; }
 #x360-blades .x360-card-stats { margin-left: calc(14 * var(--u)); display: flex; gap: calc(22 * var(--u)); }
 #x360-blades .x360-card-stat { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
 #x360-blades .x360-card-stat[hidden] { display: none; }
@@ -323,12 +323,6 @@ body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible)
 }
 body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible),
 body.x360d .ContentFrame .DialogButton:not(.Disabled):is(:hover, :focus-visible) * { color: #fff !important; }
-body.x360d :is(.PlayButton, .StreamingSelector) {
-  background: var(--x360-focus) !important;
-  color: #fff !important;
-  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0008 !important;
-  text-shadow: 0 1px 1px #0006 !important;
-}
 body.x360d .PlayButton { border-radius: 4px 0 0 4px !important; }
 body.x360d .PlayButton:only-child { border-radius: 4px !important; }
 body.x360d .StreamingSelector { border-radius: 0 4px 4px 0 !important; }
@@ -621,11 +615,10 @@ body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDr
 body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog :is(.DialogDropDown, [class*="DropDownControlButton"]):hover :is(*, svg) { color: #fff !important; }
 body.x360d :is(.ModalPosition, .ContentFrame) .PagedSettingsDialog .DialogInput { background: #0d131873 !important; color: #fff !important; border-radius: 4px !important; border: 0 !important; box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important; }
 body.x360d .CollectionsButton .CollectionBar .CollectionButton { background: transparent !important; }
-/* collections button: black squares on the green button gradient, inverted on hover */
-/* collections button: silver like every other button, Xbox green on hover */
+/* collections button: silver like every other button with Xbox green squares; on hover the button turns green and the squares white */
 body.x360d .CollectionsButton .CollectionBar { background: var(--x360-plate) !important; box-shadow: inset 0 1px 0 #fff !important; }
 body.x360d .CollectionsButton .CollectionBar:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
-body.x360d .CollectionsButton .CollectionBar .CollectionIconBox { background: #1c282e !important; border-radius: 1px !important; }
+body.x360d .CollectionsButton .CollectionBar .CollectionIconBox { background: var(--x360-focus) !important; border-radius: 1px !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
 body.x360d .CollectionsButton .CollectionBar:hover .CollectionIconBox { background: #fff !important; }
 /* the four squares, evenly spaced and centred */
 body.x360d .CollectionsButton .CollectionBar .CollectionIcon {
@@ -744,3 +737,35 @@ body.x360d .LibraryItemActionButton :is(svg, svg *) { color: #1c282e !important;
 body.x360d .LibraryItemActionButton :is(.playTriangle, svg [fill]:not([fill="none"])) { fill: currentColor !important; }
 body.x360d .LibraryItemActionButton:hover { background: var(--x360-focus) !important; box-shadow: inset 0 1px 0 #d9f59a !important; }
 body.x360d .LibraryItemActionButton:hover :is(svg, svg *) { color: #fff !important; }
+
+/* ===================== game hover card (home shelves, collections): glass panel with a silver title plate ===================== */
+body.x360d .AppPortraitHover {
+  background: linear-gradient(#2c383ef5, #10181df5) !important;
+  border-radius: calc(8 * var(--u)) !important;
+  overflow: hidden !important;
+  box-shadow: inset 0 1px 0 #ffffff59, inset 0 0 0 1px #ffffff26, 0 calc(6 * var(--u)) calc(18 * var(--u)) #000000a6 !important;
+}
+/* Steam paints the game's capsule art behind the card's contents, which washed the glass out: hide it */
+body.x360d .AppPortraitHover .CapsuleBackgroundContainer { display: none !important; }
+body.x360d .AppPortraitHover .AppTitleContainer {
+  background: var(--x360-plate) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+body.x360d .AppPortraitHover .ScreenshotCrossfade { background: #00000059 !important; }
+/* everything under the title: light text, with the status line and box headings in Xbox green */
+body.x360d .AppPortraitHover .Content > :not(.AppTitleContainer) :where(div, span, a) { color: #f2f5f6 !important; text-shadow: 0 1px 1px #0009 !important; }
+/* dark title on the silver plate (after the light-text rule so it wins) */
+body.x360d .AppPortraitHover .AppTitleContainer, body.x360d .AppPortraitHover .AppTitleContainer * { color: #1c282e !important; text-shadow: none !important; }
+body.x360d .AppPortraitHover :is(.AppStatus, .AppStatus *, .PlaytimeDetails .Header) { color: #c9f06a !important; }
+/* the boxes under the screenshot (time played, download progress) */
+body.x360d .AppPortraitHover .Content > div:not(.AppTitleContainer, .ScreenshotCrossfade, .AppStatus) > div {
+  background: #ffffff14 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff1f, inset 0 0 0 1px #ffffff12 !important;
+  padding: 7px 10px !important;
+  box-sizing: border-box !important;
+}
+/* a progress bar's fill is an empty element sized with an inline width */
+body.x360d .AppPortraitHover .Content > div:not(.AppTitleContainer, .ScreenshotCrossfade, .AppStatus) [style*="width"]:empty {
+  background: var(--x360-focus) !important;
+}

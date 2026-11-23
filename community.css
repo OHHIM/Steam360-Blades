@@ -96,6 +96,15 @@ input, textarea, select, button { text-shadow: none !important; }
 .achievement_progress_bar_ctn { background: #0a0f1280 !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff26 !important; border-radius: 6px !important; }
 .game_info_achievement.plus_more { background: #ffffff26 !important; border-radius: 3px !important; }
 [data-x360-bg="backdrop"], .game_page_background { background-image: none !important; background-color: transparent !important; }
+/* community hub pages (the community home and each game's hub): these load after the page opens, so store.js
+   can miss them. The game's art behind the page goes, and the cards are glass so the dashboard shows through */
+.apphub_background, .apphub_CardBG { background-image: none !important; background-color: transparent !important; }
+.apphub_Card {
+  background-color: #0a101438 !important;
+  background-image: none !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 1px 0 #ffffff1f, inset 0 0 0 1px #ffffff12 !important;
+}
 :is([class*="btn_green"], [class*="btnv6_green"], .btn_addtocart, .btn_green_steamui, .btn_green_white_innerfade),
 :is([class*="btn_green"], [class*="btnv6_green"], .btn_addtocart, .btn_green_steamui, .btn_green_white_innerfade) * { color: #fff !important; text-shadow: 0 1px 1px #0006 !important; }
 .search_released, .search_reviewscore, .search_price_discount_combined .discount_original_price { color: #e3e9eb !important; }

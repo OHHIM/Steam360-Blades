@@ -1,34 +1,108 @@
 /* Xbox 360 Blades: Steam's desktop popup menus, Settings window and Friends window. Loaded in every window,
    but each block is scoped to that window's own html class. */
 
-/* ===================== popup / context menus ===================== */
-html.ContextMenuPopup .contextMenuContents {
+/* ===================== popup / context menus =====================
+   Steam draws menus either as their own popup window (html.ContextMenuPopup) or inside the window they belong to
+   (.contextMenu: settings dropdowns, "Create Category" in the friends list); both get the same silver menu */
+/* Steam's menu wrapper paints its own dark grey box around the contents: only the silver menu should show */
+.contextMenu { background: transparent !important; padding: 0 !important; }
+.contextMenu:not(html.ContextMenuPopup *) { box-shadow: 0 6px 18px #000000a6 !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuContents {
   background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
   box-shadow: inset 0 0 0 1px #ffffffcc, inset 4px 0 0 #7ab800 !important;
   padding: 4px 4px 4px 8px !important;
   border-radius: 0 !important;
   color: #1c282e !important;
 }
-html.ContextMenuPopup .contextMenuItem {
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem {
   background: transparent !important;
   color: #1c282e !important;
   border-radius: 3px !important;
   text-shadow: none !important;
 }
-html.ContextMenuPopup .contextMenuItem :is(*, svg) { color: inherit !important; text-shadow: none !important; }
-html.ContextMenuPopup .contextMenuItem:not(.disabled):is(:hover, .gpfocus, [class*="_18z-3vkWndCBO5WJgFldRK"]) {
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem :is(*, svg) { color: inherit !important; text-shadow: none !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem:not(.disabled):is(:hover, .gpfocus, [class*="_18z-3vkWndCBO5WJgFldRK"]) {
   background: linear-gradient(#a9d43c, #5a9612) !important;
   box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
   color: #fff !important;
 }
-html.ContextMenuPopup .contextMenuItem.disabled,
-html.ContextMenuPopup .contextMenuItem.disabled * { color: #7f8c93 !important; }
-html.ContextMenuPopup :is(.contextMenuItem.Separator, .contextMenuItemHR, .Separator) {
+/* the big action at the top of a game's menu (Play, Install, Update, Resume...): an Xbox green button */
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem.ContextMenuAction {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
+  color: #fff !important;
+  text-shadow: 0 1px 1px #0006 !important;
+}
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem.ContextMenuAction :is(*, svg) { color: #fff !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem.ContextMenuAction:is(:hover, .gpfocus) { background: linear-gradient(#bde556, #66a81a) !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem.disabled,
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuItem.disabled * { color: #7f8c93 !important; }
+:is(html.ContextMenuPopup, .contextMenu) :is(.contextMenuItem.Separator, .contextMenuItemHR, .Separator) {
   height: 1px !important; min-height: 0 !important; padding: 0 !important;
   margin: 4px 8px !important; border: 0 !important;
   background: #7f9098 !important; box-shadow: 0 1px 0 #fff !important;
 }
-html.ContextMenuPopup .AccountMenuPopup :is(.WalletBalance, [class*="Balance"]) { color: #3a7a00 !important; }
+:is(html.ContextMenuPopup, .contextMenu) .AccountMenuPopup :is(.WalletBalance, [class*="Balance"]) { color: #3a7a00 !important; }
+
+/* ===================== dropdown lists (Settings and other dialogs) =====================
+   Drawn inside the dialog's own window (.DialogDropDownMenu), so they get the silver menu here too */
+.DialogDropDownMenu {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 4px 0 0 #7ab800, 0 6px 18px #000000a6 !important;
+  border-radius: 0 !important;
+  padding: 4px 4px 4px 8px !important;
+  color: #1c282e !important;
+}
+.DialogDropDownMenu_Item { background: transparent !important; color: #1c282e !important; border-radius: 3px !important; text-shadow: none !important; }
+.DialogDropDownMenu_Item :is(*, svg) { color: inherit !important; }
+.DialogDropDownMenu_Item:is(:hover, :focus, :focus-visible, .gpfocus) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
+  color: #fff !important;
+}
+.DialogDropDownMenu ::-webkit-scrollbar { width: 8px; background: #00000014; }
+.DialogDropDownMenu ::-webkit-scrollbar-thumb { background: #7f9098; border-radius: 4px; }
+/* the newer multi-select lists (checkbox dropdowns in Notifications settings): silver menu, Xbox green checkboxes */
+.ListBox[role="listbox"] {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 4px 0 0 #7ab800, 0 6px 18px #000000a6 !important;
+  border-radius: 0 !important;
+  padding: 4px 4px 4px 8px !important;
+}
+.ListBoxOption { background: transparent !important; border-radius: 3px !important; }
+.ListBoxOption .Text { color: #1c282e !important; text-shadow: none !important; }
+.ListBoxOption .Text + .Text { color: #4a5a63 !important; }
+.ListBoxOption:is([aria-disabled="true"], [data-disabled="true"]) { opacity: .6 !important; }
+.ListBoxOption .Checkbox {
+  background: linear-gradient(#ffffff, #dde4e7) !important;
+  border-color: #7f9098 !important;
+  box-shadow: inset 0 1px 2px #0003 !important;
+  color: transparent !important;
+}
+.ListBoxOption [aria-checked="true"] .Checkbox {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  border-color: #4a7f0e !important;
+  box-shadow: inset 0 1px 0 #d9f59a !important;
+  color: #fff !important;
+}
+.ListBoxOption:is(:hover, [data-focused="true"]):not([aria-disabled="true"]) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0005 !important;
+}
+.ListBoxOption:is(:hover, [data-focused="true"]):not([aria-disabled="true"]) .Text { color: #fff !important; }
+.ListBoxOption:is(:hover, [data-focused="true"]):not([aria-disabled="true"]) [aria-checked="true"] .Checkbox { background: #fff !important; color: #5a9612 !important; border-color: #fff !important; }
+/* the newer style of dropdown button (Notifications settings and the like): a silver plate like the classic ones */
+.ControlBox.Variant-basic {
+  background: linear-gradient(#f6f8f6, #b4bfc3) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  border-radius: 4px !important;
+}
+.ControlBox.Variant-basic :is(*, svg) { color: #1c282e !important; text-shadow: none !important; }
+.ControlBox.Variant-basic:is(:hover, :focus-visible, [aria-expanded="true"]) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0006 !important;
+}
+.ControlBox.Variant-basic:is(:hover, :focus-visible, [aria-expanded="true"]) :is(*, svg) { color: #fff !important; }
 
 /* ===================== Steam Settings (the "system" blade) ===================== */
 html.MillenniumWindow_Settings body {
@@ -111,6 +185,10 @@ html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle)
   color: #1c282e !important; text-shadow: none !important;
 }
 html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle) :is(*, svg) { color: #1c282e !important; fill: currentColor; text-shadow: none !important; }
+/* header icons (search, friend requests, add friend, group chats): Xbox green gradient, using the SVG gradient popups.js adds.
+   The red friend-request dot stays red, and the plus inside the new group chat bubble stays as it is */
+html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle, .chatSectionTitle) svg :is(path, circle, polygon, rect):not(.redCircle, [fill="none"]) { fill: url(#x360-green) #5a9612 !important; }
+html.friendsui-container :is(.friendTab.socialListTab, .friendsListSectionTitle, .chatSectionTitle) svg.SVGIcon_DoubleArrow polyline { stroke: url(#x360-green) #5a9612 !important; }
 html.friendsui-container :is(.friendlistListContainer, .chatRoomListContainer) {
   background: #10181d59 !important;
   box-shadow: inset 0 1px 0 #ffffff1f !important;
@@ -147,23 +225,25 @@ html.friendsui-container :is(.quickAccessFriends, .quickAccessFriends *, .emptyF
 html.friendsui-container .chatRoomListContainer a { color: #fff !important; }
 
 /* ===================== more menu bits: friend menus, game sections, notifications ===================== */
-html.ContextMenuPopup .ContextMenuSeparator {
+:is(html.ContextMenuPopup, .contextMenu) .ContextMenuSeparator {
   height: 1px !important; margin: 4px 8px !important; border: 0 !important;
   background: #7f9098 !important; box-shadow: 0 1px 0 #fff !important;
 }
-html.ContextMenuPopup .contextMenuSectionContent { background: #10181d14 !important; border-radius: 3px !important; }
-html.ContextMenuPopup .contextMenuGameTitle {
+/* Steam also draws a grey line on top of the item after a divider (e.g. Properties): the divider above is enough */
+:is(html.ContextMenuPopup, .contextMenu) .ContextMenuSeparator + .contextMenuItem { border-top: 0 !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuSectionContent { background: #10181d14 !important; border-radius: 3px !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuGameTitle {
   background: linear-gradient(#3b464d, #1b2227) !important; border-radius: 3px !important; overflow: hidden !important;
   box-shadow: inset 0 1px 0 #ffffff40 !important;
 }
-html.ContextMenuPopup .contextMenuGameTitle :is(.contextMenuGameName, *) { color: #fff !important; text-shadow: 0 1px 2px #000a !important; }
-html.ContextMenuPopup .contextMenuGameOptions:not(:hover) :is(*, svg) { color: #1c282e !important; }
-html.ContextMenuPopup .contextMenuPlayButton .SVGIcon_Play :is(circle, path, polygon) { stroke: currentColor !important; }
-html.ContextMenuPopup .SubMenu .Arrow :is(*, svg) { color: inherit !important; }
-html.ContextMenuPopup .NotificationsMenu,
-html.ContextMenuPopup .NotificationsMenu :is(.NotificationHeader, .NotificationsMenuScrollable, .PinnedTemplateDesktop, .NotificationsMenuEntriesContainer) { background: transparent !important; }
-html.ContextMenuPopup .NotificationsMenu :is(*:not(svg):not(path)) { color: #1c282e !important; text-shadow: none !important; }
-html.ContextMenuPopup .NotificationsMenu .AllNotificationsButton {
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuGameTitle :is(.contextMenuGameName, *) { color: #fff !important; text-shadow: 0 1px 2px #000a !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuGameOptions:not(:hover) :is(*, svg) { color: #1c282e !important; }
+:is(html.ContextMenuPopup, .contextMenu) .contextMenuPlayButton .SVGIcon_Play :is(circle, path, polygon) { stroke: currentColor !important; }
+:is(html.ContextMenuPopup, .contextMenu) .SubMenu .Arrow :is(*, svg) { color: inherit !important; }
+:is(html.ContextMenuPopup, .contextMenu) .NotificationsMenu,
+:is(html.ContextMenuPopup, .contextMenu) .NotificationsMenu :is(.NotificationHeader, .NotificationsMenuScrollable, .PinnedTemplateDesktop, .NotificationsMenuEntriesContainer) { background: transparent !important; }
+:is(html.ContextMenuPopup, .contextMenu) .NotificationsMenu :is(*:not(svg):not(path)) { color: #1c282e !important; text-shadow: none !important; }
+:is(html.ContextMenuPopup, .contextMenu) .NotificationsMenu .AllNotificationsButton {
   background: linear-gradient(#a9d43c, #5a9612) !important; color: #fff !important; border-radius: 4px !important;
 }
 
@@ -272,9 +352,6 @@ html.MillenniumWindow_Settings.x360-docked body {
     url("blades-assets/blade_4_bgcolor.svg") var(--x360-bgx, 0) var(--x360-bgy, 0) / var(--x360-bgw, 100%) var(--x360-bgh, 100%) no-repeat,
     #20262a !important;
 }
-/* keep the grip element (Steam sizes its native resize corner from it), just invisible */
-html.MillenniumWindow_Settings.x360-locked .window_resize_grip { opacity: 0 !important; pointer-events: none !important; }
-html.MillenniumWindow_Settings.x360-locked :is(.title-area, .title-bar, .DragArea, [class*="TitleBar"]) { -webkit-app-region: no-drag !important; }
 html.MillenniumWindow_Settings.x360-docked .PagedSettingDialog_ContentColumn { background: transparent !important; }
 
 /* Settings > Family: member rows as glass rows, the "Me" tag in Xbox green */

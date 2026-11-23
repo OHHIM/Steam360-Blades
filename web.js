@@ -6,13 +6,17 @@
   // pages shown inside a small dialog (update news / special offers) instead of the main window
   if (/^\/marketingmessages/.test(location.pathname)) html.classList.add('x360-embedded');
   if (location.hostname === 'help.steampowered.com') html.classList.add('x360-help');
+  const checked = new WeakSet();
   function tag() {
     // points shop item cards are frosted glass panels with hashed class names
     if (/^\/points/.test(location.pathname)) {
       for (const el of document.querySelectorAll('div:not([data-x360-card])')) {
+        if (checked.has(el)) continue;
+        const r = el.getBoundingClientRect();
+        if (!r.width && !r.height) continue; // not drawn yet: check it on a later pass
+        checked.add(el);
         const cs = getComputedStyle(el);
         if (!cs.backdropFilter || !cs.backdropFilter.includes('blur')) continue;
-        const r = el.getBoundingClientRect();
         if (r.width >= 120 && r.width <= 420 && r.height >= 150) el.setAttribute('data-x360-card', '');
       }
     }
