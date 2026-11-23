@@ -539,6 +539,10 @@ body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSetting
   background: var(--x360-focus) !important; color: #fff !important; box-shadow: inset 0 1px 0 #d9f59a !important;
 }
 body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) .DialogButton:not(.Disabled):not(:disabled):hover * { color: #fff !important; }
+/* Steam's thin blue strip along the top of every dialog: the dialog already has its green top edge */
+body.x360d .ModalPosition_TopBar { display: none !important; }
+/* options Steam has switched off (e.g. "new collection" before a name is typed) look switched off */
+body.x360d .ModalPosition .Option.Disabled { opacity: .5 !important; }
 body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(.DialogButton.Disabled, .DialogButton:disabled) { background: #1c282e1f !important; color: #1c282e66 !important; box-shadow: none !important; }
 body.x360d .ModalPosition .DialogContent:not(.PagedSettingsDialog, .PagedSettingsDialog *) :is(input, textarea, .DialogInput, .DialogInputLabelGroup input) {
   background: #f7faf8 !important; color: #1c282e !important; border: 0 !important; border-radius: 4px !important;
