@@ -74,10 +74,7 @@ The goal is to bring back a little of that classic Xbox 360 atmosphere while kee
 
 ### Credits
 - Huge credits to @Tameranian3d ON TWITTER !!!
-- Microsoft / Xbox – Original Blades dashboard inspiration.
+- Microsoft / Xbox – Original Blades dashboard inspiration, as well as the sounds in the sounds folder.
 - Millennium – Steam customisation framework.
 - Theme contributors and sound creators – See repository credits.
 
-### About the sounds
-
-The sounds in the `sounds` folder are from the Xbox 360 dashboard and belong to Microsoft. They're not mine, and they're not covered by this repo's GPL-3.0 licence. I've included them because the theme doesn't feel right without them. If you're from Microsoft and want them removed, open an issue and I'll take them out.
