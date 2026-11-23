@@ -11,7 +11,7 @@ This theme recreates the look and feel of the iconic Blades dashboard, bringing 
 - **Classic Blades design** – Inspired by the original Xbox 360 dashboard, with its distinctive green styling and blade-based navigation.
 - **Normal Mode support** – The theme works with Steam's standard desktop interface.
 - **Big Picture support** – Extends the experience to Steam's Big Picture Mode, making it a good fit for a controller-based setup.
-- **Custom sounds** – Includes Xbox 360-inspired interface sounds to bring a little more of the original dashboard experience to Steam. (( THESE ARE DEPENDENT ON AN EXTERNAL FOLDER, I DO NOT BELIEVE I CAN SUBMIT THE SOUNDS AS THEY ARE MICROSOFTS ))
+- **Custom sounds** – Includes Xbox 360-inspired interface sounds to bring a little more of the original dashboard experience to Steam.
 - **Corner Radius change** – If you don't like rounded corners you can make them squared.
 - **Interchangeable downloads tab** - if you don't like it as downloads it can be a combined downloads/friends area, or a second game page.
 - **Vertical windows icons** - vertical minimize, close and maximize/minimize buttons to stay out of the way!
@@ -77,3 +77,7 @@ The goal is to bring back a little of that classic Xbox 360 atmosphere while kee
 - Microsoft / Xbox – Original Blades dashboard inspiration.
 - Millennium – Steam customisation framework.
 - Theme contributors and sound creators – See repository credits.
+
+### About the sounds
+
+The sounds in the `sounds` folder are from the Xbox 360 dashboard and belong to Microsoft. They're not mine, and they're not covered by this repo's GPL-3.0 licence. I've included them because the theme doesn't feel right without them. If you're from Microsoft and want them removed, open an issue and I'll take them out.
