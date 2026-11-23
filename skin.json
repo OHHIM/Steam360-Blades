@@ -1,8 +1,14 @@
 {
   "name": "Xbox 360 Blades",
   "author": "tameranian",
-  "description": "",
+  "description": "The classic 2005 Xbox 360 Blades dashboard for Steam, in both the desktop client and Big Picture Mode, with Xbox 360 interface sounds.",
   "version": "1.0.0",
+  "github": {
+    "owner": "OHHIM",
+    "repo_name": "Steam360-Blades"
+  },
+  "header_image": "https://raw.githubusercontent.com/OHHIM/Steam360-Blades/main/images/header.png",
+  "splash_image": "https://raw.githubusercontent.com/OHHIM/Steam360-Blades/main/images/splash.png",
   "Patches": [
     {
       "MatchRegexString": "https://(store\\.steampowered|steamcommunity|help\\.steampowered)\\.com.*",

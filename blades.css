@@ -1,0 +1,488 @@
+.BasicUiRoot:not([data-x360-off]) {
+  --u: calc(100vh / 770);
+  --step: calc(42 * var(--u));
+  --x360-left-count: 1;
+  --x360-right-count: 3;
+  --x360-left: calc(var(--x360-left-count) * var(--step) + 92 * var(--u));
+  --x360-right: calc(var(--x360-right-count) * var(--step) + 62 * var(--u));
+  --x360-top: calc(86 * var(--u));
+  --x360-foot: calc(46 * var(--u));
+  --x360-font: "NXE Convection", "Segoe UI", sans-serif;
+  --x360-green: #7ab800;
+  --x360-bg: url("blades-assets/blade_1_bgcolor.svg");
+  --x360-jewel: url("blades-assets/blade_1_jewel.svg");
+  background: #20262a var(--x360-bg) center / 100% 100% no-repeat !important;
+  font-family: var(--x360-font) !important;
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="2"] { --x360-bg: url("blades-assets/blade_2_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_2_jewel.svg"); }
+.BasicUiRoot:not([data-x360-off])[data-blade="3"] { --x360-bg: url("blades-assets/blade_3_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_3_jewel.svg"); }
+.BasicUiRoot:not([data-x360-off])[data-blade="4"] { --x360-bg: url("blades-assets/blade_4_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_4_jewel.svg"); }
+.BasicUiRoot:not([data-x360-off])[data-blade="5"] { --x360-bg: url("blades-assets/blade_5_bgcolor.svg"); --x360-jewel: url("blades-assets/blade_5_jewel.svg"); }
+#x360-blades { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+#x360-blades button,
+#x360-blades .x360-jewel {
+  position: absolute;
+  top: calc(-36 * var(--u));
+  height: calc(940 * var(--u));
+  width: calc(136 * var(--u));
+  left: calc(var(--slot) * var(--step));
+  margin: 0; padding: 0; border: 0; border-radius: 0; min-width: 0;
+  background: transparent center / 100% 100% no-repeat;
+  box-shadow: none;
+  transition: left .32s cubic-bezier(.2, .7, .2, 1);
+}
+#x360-blades button {
+  background-image: url("blades-assets/blade_grey_left.svg");
+  color: #2c3a46;
+  font: 400 calc(23 * var(--u)) / 1 var(--x360-font);
+  pointer-events: auto;
+  cursor: pointer;
+}
+#x360-blades button[data-side="right"] {
+  width: calc(161 * var(--u));
+  left: calc(100% - var(--slot) * var(--step) - 161 * var(--u));
+  background-image: url("blades-assets/blade_grey_rt.svg");
+}
+#x360-blades button[data-side="open"] { visibility: hidden; pointer-events: none; }
+#x360-blades .x360-jewel { background-image: var(--x360-jewel); }
+#x360-blades button span {
+  position: absolute;
+  left: 50%; top: 40%;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  text-transform: lowercase;
+  letter-spacing: .02em;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 1px 0 #ffffffb0;
+}
+#x360-blades button:is(:hover, :focus-visible) span { color: #0c1319; }
+#x360-blades button:focus-visible { outline: none; }
+#x360-blades .x360-title {
+  position: absolute;
+  left: calc(var(--x360-left) + 14 * var(--u));
+  top: calc(20 * var(--u));
+  font: 400 calc(50 * var(--u)) / 1 var(--x360-font);
+  text-transform: lowercase;
+  color: #fff;
+  text-shadow: 0 calc(2 * var(--u)) calc(4 * var(--u)) #0006;
+}
+.BasicUiRoot:not([data-x360-off]) #MainNavMenu-Rest { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) #GamepadUI_Full_Root {
+  margin-left: var(--x360-left) !important;
+  margin-right: var(--x360-right) !important;
+  width: auto !important;
+  background: transparent !important;
+}
+.BasicUiRoot:not([data-x360-off]) :is(.AppDetailsMain, .GamepadPage, .BackstackRootTest, .ScrollArea, .RecentSection, .ContentWrapper) {
+  background: transparent !important;
+}
+.BasicUiRoot:not([data-x360-off]) #GamepadUI_Full_Root {
+  padding: var(--x360-top) 0 var(--x360-foot) !important;
+  box-sizing: border-box !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Main {
+  background: linear-gradient(#e9eef01f, #10181d8c 22%, #10181d73) !important;
+  border-radius: calc(14 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #ffffff59, inset 0 0 0 1px #ffffff1f, 0 calc(4 * var(--u)) calc(14 * var(--u)) #00000059 !important;
+  overflow: hidden !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header {
+  top: calc(24 * var(--u)) !important;
+  background: transparent !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Footer {
+  left: var(--x360-left) !important;
+  right: var(--x360-right) !important;
+  width: auto !important;
+  height: var(--x360-foot) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.BasicUiRoot:not([data-x360-off]), .BasicUiRoot:not([data-x360-off]) * { font-family: var(--x360-font) !important; }
+.BasicUiRoot:not([data-x360-off]) #header .SearchAndTitleContainer {
+  flex: 0 0 calc(270 * var(--u)) !important;
+  margin-left: auto !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header .SearchFieldBackground {
+  background: #0d131873 !important;
+  border-radius: calc(20 * var(--u)) !important;
+  box-shadow: inset 0 0 0 1px #ffffff33 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .RecentGamesBackgroundContainer { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) .RecentGamesContainer {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: calc(14 * var(--u)) 0 0 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .RecentSection { height: auto !important; min-height: 0 !important; }
+.BasicUiRoot:not([data-x360-off]) .BigArtMode .RecentGamesInnerContainer { transform: none !important; margin: 0 !important; }
+.BasicUiRoot:not([data-x360-off]) :is(.GamepadLibrary, .GamepadTabbedPage, .TabHeaderRowWrapper) { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) #Main {
+  --basicui-header-height: 0px !important;
+  --gamepadui-current-footer-height: 0px !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Footer .ActionButtonLabel {
+  text-transform: none !important;
+  font-weight: 400 !important;
+  font-size: calc(19 * var(--u)) !important;
+  color: #fff !important;
+  text-shadow: 0 1px 2px #0008 !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Footer .FooterGlyphSize {
+  width: calc(30 * var(--u)) !important;
+  height: calc(30 * var(--u)) !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Footer .ActionButtonGlyph { display: flex !important; align-items: center !important; overflow: visible !important; }
+.BasicUiRoot:not([data-x360-off]) {
+  --x360-plate: linear-gradient(#f6f8f6, #b4bfc3);
+  --x360-focus: linear-gradient(#a9d43c, #5a9612);
+}
+.BasicUiRoot:not([data-x360-off]) .DialogButton {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+  border-radius: calc(4 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+  text-shadow: none !important;
+}
+.BasicUiRoot:not([data-x360-off]) .DialogButton:is(.gpfocus, :hover) {
+  background: var(--x360-focus) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 0 calc(10 * var(--u)) #b6e84a99 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .Tab.Selected {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+}
+.BasicUiRoot:not([data-x360-off]) .Tab.Selected * { color: #1c282e !important; }
+.BasicUiRoot:not([data-x360-off]) .Tab.gpfocus { background: var(--x360-focus) !important; }
+.BasicUiRoot:not([data-x360-off]) .Tab.gpfocus * { color: #fff !important; }
+.BasicUiRoot:not([data-x360-off]) #Main :has(> .PagedSettingsDialog_PageListColumn) { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListColumn {
+  background: #ffffff12 !important;
+  box-shadow: inset -1px 0 0 #ffffff26 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .PagedSettingDialog_ContentColumn { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem { border-radius: 0 !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem.Active {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+}
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem:is(.gpfocus, :hover) {
+  background: var(--x360-focus) !important;
+  color: #fff !important;
+}
+.BasicUiRoot:not([data-x360-off]) .Field.Background { background: #ffffff14 !important; }
+.BasicUiRoot:not([data-x360-off]) .Field.HighlightOnFocus:is(.gpfocus, .gpfocuswithin) {
+  background: #9ccc3440 !important;
+  box-shadow: inset calc(4 * var(--u)) 0 0 #a9d43c !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header::before { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) .Tab {
+  text-transform: none !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  border-radius: calc(4 * var(--u)) !important;
+}
+.BasicUiRoot:not([data-x360-off]) .Tab * { text-transform: none !important; font-weight: 400 !important; }
+.BasicUiRoot:not([data-x360-off]) .LibraryItemBox {
+  box-shadow: 0 0 0 1px #ffffff59, 0 calc(4 * var(--u)) calc(10 * var(--u)) #00000080 !important;
+  border-radius: calc(3 * var(--u)) !important;
+}
+.BasicUiRoot:not([data-x360-off]) :is(.gpfocus .LibraryItemBox, .LibraryItemBox.gpfocus, .gpfocus > * > .LibraryItemBox) {
+  box-shadow: 0 0 0 calc(3 * var(--u)) #fff, 0 0 calc(18 * var(--u)) calc(4 * var(--u)) #b6e84ad9 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .TabbedContent {
+  background: transparent !important;
+  border-top: 1px solid #ffffff33 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListColumn { padding: calc(8 * var(--u)) !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem {
+  margin-bottom: calc(3 * var(--u)) !important;
+  border-radius: calc(4 * var(--u)) !important;
+  background: #ffffff1a !important;
+  box-shadow: inset 0 1px 0 #ffffff33 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem.Active { box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem.Active * { color: #1c282e !important; fill: #1c282e; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem:is(.gpfocus, :hover) * { color: #fff !important; fill: #fff; }
+.BasicUiRoot:not([data-x360-off]) .Field.Background {
+  border-radius: calc(4 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #ffffff26 !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header .HeaderBrowser { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) #header.HeaderOpaque { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .PagedSettingsDialog_PageListItem { color: #eef2f3 !important; }
+.BasicUiRoot:not([data-x360-off]) :is(.Body.ScrollContainer, .AppDetailsRoot) { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .TopGradient { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) .AppActionButton { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .PlayButton {
+  background: var(--x360-focus) !important;
+  color: #fff !important;
+  border-radius: calc(4 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0008 !important;
+  text-shadow: 0 1px 1px #0006 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .PlayButton:is(.gpfocus, :hover) {
+  box-shadow: inset 0 1px 0 #d9f59a, 0 0 0 calc(2 * var(--u)) #fff, 0 0 calc(14 * var(--u)) #b6e84acc !important;
+}
+.BasicUiRoot:not([data-x360-off]) .MenuButton {
+  background: var(--x360-plate) !important;
+  color: #1c282e !important;
+  border-radius: calc(4 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0006 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .MenuButton svg { color: #1c282e !important; fill: currentColor; }
+.BasicUiRoot:not([data-x360-off]) .MenuButton:is(.gpfocus, :hover) { background: var(--x360-focus) !important; }
+.BasicUiRoot:not([data-x360-off]) .MenuButton:is(.gpfocus, :hover) svg { color: #fff !important; }
+.BasicUiRoot:not([data-x360-off]) .AppDetailsRoot :is(.Panel, .PostTextEntryArea)[class*="_31ptFGGMZrSQc5BCX1e5lm"],
+.BasicUiRoot:not([data-x360-off]) .PostTextEntryArea {
+  background: #ffffff14 !important;
+  border-radius: calc(4 * var(--u)) !important;
+  box-shadow: inset 0 1px 0 #ffffff26 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .AppDetailsRoot * { text-transform: none !important; }#x360-blades[hidden] { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) #Footer.Relative {
+  position: absolute !important;
+  bottom: 0 !important;
+}
+.BasicUiRoot:not([data-x360-off]) #Footer .FooterLegend { width: auto !important; max-width: 100% !important; }
+.BasicUiRoot:not([data-x360-off]) #Main:has(.BrowserContainer) { border-radius: calc(6 * var(--u)) !important; }
+.BasicUiRoot:not([data-x360-off]) .BackgroundGlass { background: #0a0f12a6 !important; }
+.BasicUiRoot:not([data-x360-off]) #header { transition: opacity .15s !important; }
+.BasicUiRoot:not([data-x360-off]):has(.BackgroundGlass.Visible) #header { opacity: 0 !important; pointer-events: none !important; }
+.BasicUiRoot:not([data-x360-off]) .BackgroundGlass { background: #0a0f1280 !important; }
+.BasicUiRoot:not([data-x360-off]) #Main:has(.BrowserContainer) { border-radius: calc(14 * var(--u)) !important; }
+.BasicUiRoot:not([data-x360-off]) #header .SearchAndTitleContainer {
+  border-radius: calc(20 * var(--u)) !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  padding: 0 !important;
+  align-self: center !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header .SearchFieldBackground {
+  inset: 0 !important;
+  width: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+  background: linear-gradient(#0d131899, #0d131859) !important;
+  box-shadow: inset 0 0 0 1px #ffffff59, inset 0 2px 3px #0006 !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header .SearchIconLeft { left: calc(12 * var(--u)) !important; opacity: 1 !important; transform: none !important; }
+.BasicUiRoot:not([data-x360-off]) #header .SearchIconRight { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) #header .SearchBox {
+  opacity: 1 !important;
+  width: 100% !important;
+  padding-left: calc(40 * var(--u)) !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  color: #fff !important;
+}
+.BasicUiRoot:not([data-x360-off]) #header .SearchAndTitleContainer:is(.gpfocus, .gpfocuswithin, :focus-within) .SearchFieldBackground {
+  box-shadow: inset 0 0 0 2px #fff, 0 0 calc(10 * var(--u)) #b6e84acc !important;
+}
+@keyframes x360-in-right { from { transform: translateX(9vw); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes x360-in-left { from { transform: translateX(-9vw); opacity: 0; } to { transform: none; opacity: 1; } }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide="right"] :is(#Main, #x360-blades .x360-title, #x360-blades .x360-card) { animation: x360-in-right .36s cubic-bezier(.2, .7, .2, 1); }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide="left"] :is(#Main, #x360-blades .x360-title, #x360-blades .x360-card) { animation: x360-in-left .36s cubic-bezier(.2, .7, .2, 1); }
+#x360-blades .x360-card {
+  position: absolute;
+  left: calc(var(--x360-left) + 190 * var(--u));
+  top: calc(14 * var(--u));
+  height: calc(60 * var(--u));
+  display: none;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  padding: calc(4 * var(--u)) calc(16 * var(--u)) calc(4 * var(--u)) calc(4 * var(--u));
+  box-sizing: border-box;
+  border-radius: calc(8 * var(--u));
+  background: linear-gradient(#f6f8f6, #b4bfc3);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #ffffff99, 0 calc(3 * var(--u)) calc(8 * var(--u)) #00000073;
+  color: #1c282e;
+  font: 400 calc(20 * var(--u)) / 1.1 var(--x360-font);
+}
+.BasicUiRoot[data-blade="1"] #x360-blades .x360-card:not([hidden]) { display: flex; }
+#x360-blades .x360-card img { height: 100%; aspect-ratio: 1; border-radius: calc(4 * var(--u)); box-shadow: 0 0 0 1px #6f7b82; object-fit: cover; }
+#x360-blades .x360-card-name { max-width: calc(210 * var(--u)); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#x360-blades .x360-card-score { display: flex; align-items: center; gap: calc(6 * var(--u)); margin-top: calc(4 * var(--u)); font-size: calc(15 * var(--u)); color: #43535c; }
+#x360-blades .x360-card-g {
+  display: inline-grid; place-items: center;
+  width: calc(18 * var(--u)); height: calc(18 * var(--u)); border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #ffe27a, #e3a712 60%, #93660a);
+  color: #fff; font-size: calc(12 * var(--u)); text-shadow: 0 1px 1px #0008;
+}
+#x360-boot {
+  position: fixed; inset: 0; z-index: 100000; overflow: hidden;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 46%, #ffffff 0, #eef2f3 38%, #c9d2d6 100%);
+  transition: opacity .8s ease;
+  font-family: "NXE Convection", "Segoe UI", sans-serif;
+}
+#x360-boot.x360-boot-out { opacity: 0; pointer-events: none; }
+@keyframes x360-ribbon { 0% { transform: rotate(var(--from)) scale(2.6); opacity: 0; } 25% { opacity: .9; } 75% { opacity: .9; } 100% { transform: rotate(var(--to)) scale(.18); opacity: 0; } }
+#x360-boot .x360-boot-ribbon {
+  position: absolute; width: 70vh; height: 70vh; border-radius: 50%;
+  border: 2.2vh solid transparent; border-top-color: #9bc83a; border-right-color: #d8dee1;
+  filter: blur(.3vh); animation: x360-ribbon 2.4s cubic-bezier(.3, .1, .2, 1) both;
+}
+#x360-boot .r1 { --from: -140deg; --to: 220deg; }
+#x360-boot .r2 { --from: 60deg; --to: 400deg; border-top-color: #d8dee1; border-right-color: #7ab800; animation-delay: .18s; }
+#x360-boot .r3 { --from: 200deg; --to: 560deg; border-top-color: #b6e84a; border-right-color: #aeb9bd; animation-delay: .36s; }
+@keyframes x360-orb { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+#x360-boot .x360-boot-orb {
+  position: absolute; width: 26vh; height: 26vh; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 28%, #ffffff 0, #dfe5e7 30%, #9aa7ad 72%, #6c787e 100%);
+  box-shadow: 0 0 0 .6vh #ffffff, 0 0 6vh 1.5vh #b6e84acc, 0 2vh 4vh #0006, inset 0 -2vh 4vh #0003;
+  animation: x360-orb .9s cubic-bezier(.2, .9, .3, 1.2) 1.5s both;
+}
+#x360-boot .x360-boot-orb img {
+  width: 62%; height: 62%; object-fit: contain;
+  content: normal !important;
+  filter: brightness(0) saturate(100%) invert(52%) sepia(86%) saturate(520%) hue-rotate(43deg) brightness(96%) drop-shadow(0 .3vh .2vh #0006) !important;
+}
+@keyframes x360-word { from { opacity: 0; letter-spacing: 1.4em; } to { opacity: 1; letter-spacing: .32em; } }
+#x360-boot .x360-boot-word {
+  position: absolute; top: calc(50% + 19vh);
+  font-size: 5.2vh; color: #55626a; letter-spacing: .32em; text-indent: .32em;
+  animation: x360-word 1s ease 2.3s both;
+}
+#x360-boot .x360-boot-word span { color: #7ab800; }
+.BasicUiRoot:not([data-x360-off]) :is(.DialogButton,.Tab,.MenuButton):is(.gpfocus,:focus-visible) {border-radius:6px !important;outline:none !important;background:var(--x360-focus) !important;color:#fff !important;box-shadow:inset 0 0 0 1px #ffffffb3 !important;}
+.BasicUiRoot:not([data-x360-off]) .SearchFieldBackground {border-radius:inherit !important;}
+.BasicUiRoot:not([data-x360-off]) .SearchAndTitleContainer .SearchBox {outline:none !important;border-radius:inherit !important;}
+.BasicUiRoot:not([data-x360-off]) .FocusRingRoot * {border-radius:6px !important;}
+.BasicUiRoot:not([data-x360-off]):has(:is(.DialogButton,.Tab,.MenuButton,.SearchAndTitleContainer,.Toggle).gpfocus,.SearchAndTitleContainer.gpfocuswithin) .FocusRingRoot {visibility:hidden !important;}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] {--x360-top:calc(180 * var(--u));}
+.BasicUiRoot:not([data-x360-off]) #x360-blades .x360-card {
+ left:calc(var(--x360-left) + 14 * var(--u));top:calc(92 * var(--u));
+ width:calc(300 * var(--u));max-width:calc(100% - var(--x360-left) - var(--x360-right) - 28 * var(--u));
+ height:calc(72 * var(--u));padding:calc(8 * var(--u));gap:calc(12 * var(--u));
+}
+.BasicUiRoot:not([data-x360-off]) #x360-blades .x360-card-text {min-width:0;}
+.BasicUiRoot:not([data-x360-off]) #x360-blades .x360-card-name {max-width:100%;}
+.BasicUiRoot:not([data-x360-off])[data-blade="2"] .GamepadTabbedPage:not(.OverlayPinnedView) > .TabHeaderRowWrapper {
+ position:fixed !important;
+ top:0 !important;
+ left:0 !important;
+ right:0 !important;
+ z-index:20 !important;
+ transform:none !important;
+ visibility:visible !important;
+ opacity:1 !important;
+ padding-top:0 !important;
+ background:linear-gradient(#466344,#263e2b) !important;
+ border-radius:calc(14 * var(--u)) calc(14 * var(--u)) 0 0;
+ box-shadow:0 3px 8px #0005 !important;
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="2"] .TabHeaderRowWrapper::before {backdrop-filter:none !important;animation:none !important;}
+.BasicUiRoot:not([data-x360-off])[data-blade="2"] #Main {overflow:clip !important;}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] {--x360-top:calc(86 * var(--u));}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #Main {margin-right:calc(270 * var(--u)) !important;}
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel {display:none;}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel:not([hidden]) {
+ display:block;position:absolute;right:var(--x360-right);top:var(--x360-top);bottom:var(--x360-foot);
+ width:calc(250 * var(--u));border-radius:calc(14 * var(--u));overflow:hidden;
+ background:linear-gradient(115deg,#eef2ef,#c2cdd0 65%,#a7b8bd);
+ box-shadow:inset 0 0 0 1px #ffffffaa,0 4px 14px #0004;pointer-events:auto;
+}
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel iframe {position:absolute;left:0;top:calc(78 * var(--u));width:100%;height:calc(100% - 90 * var(--u));border:0;background:transparent;}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #x360-blades .x360-card {
+ left:auto;right:calc(var(--x360-right) + 10 * var(--u));top:calc(var(--x360-top) + 10 * var(--u));
+ width:calc(230 * var(--u));height:calc(64 * var(--u));z-index:2;
+ background:transparent;box-shadow:none;border-bottom:1px solid #8d9fa680;border-radius:0;
+ font-size:calc(18 * var(--u));
+}
+.BasicUiRoot:not([data-x360-off]) #x360-blades {isolation:isolate;}
+.BasicUiRoot:not([data-x360-off]) #x360-blades > button {z-index:5;}
+.BasicUiRoot:not([data-x360-off]) #x360-blades > .x360-jewel {z-index:4;pointer-events:none;}
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel {z-index:1;isolation:isolate;contain:paint;clip-path:inset(0 round calc(14 * var(--u)));}
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel iframe {max-width:100%;max-height:100%;z-index:0;}
+.BasicUiRoot:not([data-x360-off]) #Main > *:has(.RecentSection) {
+  --x360-fade: calc(34 * var(--u));
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0, #000 var(--x360-fade), #000 calc(100% - var(--x360-fade)), transparent 100%),
+    linear-gradient(180deg, #000 0, #000 calc(100% - var(--x360-fade)), transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0, #000 var(--x360-fade), #000 calc(100% - var(--x360-fade)), transparent 100%),
+    linear-gradient(180deg, #000 0, #000 calc(100% - var(--x360-fade)), transparent 100%);
+  mask-composite: intersect;
+}
+.BasicUiRoot:not([data-x360-off]) #Main .TabContentsScroll {
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 34 * var(--u)), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 34 * var(--u)), transparent 100%);
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] {
+  --x360-avatar: calc(310 * var(--u));
+  --x360-card-h: calc(76 * var(--u));
+  --x360-top: calc(86 * var(--u) + var(--x360-card-h));
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #Main {
+  margin-right: var(--x360-avatar) !important;
+  border-radius: 0 0 calc(14 * var(--u)) calc(14 * var(--u)) !important;
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #x360-blades .x360-card {
+  left: var(--x360-left); right: calc(var(--x360-right) + var(--x360-avatar));
+  top: calc(86 * var(--u)); width: auto; max-width: none; height: var(--x360-card-h);
+  padding: calc(8 * var(--u)) calc(22 * var(--u)) calc(8 * var(--u)) calc(8 * var(--u));
+  gap: calc(14 * var(--u)); z-index: 2;
+  border: 0; border-radius: calc(14 * var(--u)) calc(14 * var(--u)) 0 0;
+  background: linear-gradient(#f6f8f6, #c3ced2 60%, #aebbc0);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px #ffffff99, 0 calc(2 * var(--u)) calc(6 * var(--u)) #00000059;
+  font-size: calc(24 * var(--u));
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #x360-blades .x360-card img {
+  border-radius: calc(6 * var(--u)); box-shadow: 0 0 0 1px #6f7b82, 0 1px 3px #0006;
+}
+#x360-blades .x360-card-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+#x360-blades .x360-card-status { margin-top: calc(5 * var(--u)); font-size: calc(15 * var(--u)); color: #4a5a63; display: flex; align-items: center; gap: calc(6 * var(--u)); }
+#x360-blades .x360-card-status::before { content: ""; width: calc(9 * var(--u)); height: calc(9 * var(--u)); border-radius: 50%; background: #8a979d; box-shadow: inset 0 1px 1px #fff8; }
+#x360-blades .x360-card-status:is([data-state="online"], [data-state="in-game"])::before { background: radial-gradient(circle at 50% 30%, #c9f06a, #5a9612); box-shadow: 0 0 calc(5 * var(--u)) #9ccc34; }
+#x360-blades .x360-card-status[data-state="away"]::before { background: #e3a712; }
+#x360-blades .x360-card-stats { margin-left: auto; display: flex; gap: calc(26 * var(--u)); }
+#x360-blades .x360-card-stat { display: flex; flex-direction: column; align-items: flex-end; line-height: 1; }
+#x360-blades .x360-card-stat[hidden] { display: none; }
+#x360-blades .x360-card-stat b { font-weight: 400; font-size: calc(26 * var(--u)); color: #1c282e; }
+#x360-blades .x360-card-stat span { margin-top: calc(4 * var(--u)); font-size: calc(13 * var(--u)); color: #4a5a63; }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel:not([hidden]) {
+  right: var(--x360-right); top: calc(70 * var(--u)); bottom: calc(var(--x360-foot) - 6 * var(--u));
+  width: var(--x360-avatar);
+  background: none; box-shadow: none; border-radius: 0; overflow: visible;
+  clip-path: none; contain: none;
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel::after {
+  content: ""; position: absolute; left: 16%; right: 16%; bottom: calc(8 * var(--u)); height: calc(26 * var(--u));
+  background: radial-gradient(closest-side, #00000066, transparent); z-index: -1; pointer-events: none;
+}
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel iframe { left: 0; top: auto; bottom: 0; width: 100%; height: calc(var(--x360-avatar) / 0.65); }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] { --x360-overlap: calc(118 * var(--u)); }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #Main { margin-right: calc(var(--x360-avatar) - var(--x360-overlap)) !important; }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] #x360-blades .x360-card { right: calc(var(--x360-right) + var(--x360-avatar) - var(--x360-overlap)); }
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel { position: absolute; z-index: 6; pointer-events: none; }
+.BasicUiRoot:not([data-x360-off]) .x360-profile-panel iframe { pointer-events: none; }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel::after { z-index: 0; }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel iframe { z-index: 1; }.BasicUiRoot:not([data-x360-off])[data-blade="1"] .x360-profile-panel { transform: translateX(calc(16 * var(--u))); }
+.BasicUiRoot:not([data-x360-off]) { background: #20262a !important; }
+.BasicUiRoot:not([data-x360-off]) #x360-blades {
+  background: var(--x360-bg) center / 100% 100% no-repeat;
+  will-change: transform;
+}
+.BasicUiRoot:not([data-x360-off]) #x360-blades > button,
+.BasicUiRoot:not([data-x360-off]) #x360-blades > .x360-jewel {
+  left: 0 !important;
+  transform: translateX(calc(var(--slot) * var(--step)));
+  transition: transform .3s cubic-bezier(.2, .7, .2, 1) !important;
+  will-change: transform;
+}
+.BasicUiRoot:not([data-x360-off]) #x360-blades > button[data-side="right"] {
+  transform: translateX(calc(100vw - var(--slot) * var(--step) - 161 * var(--u)));
+}
+.BasicUiRoot:not([data-x360-off]) #Main { will-change: transform; }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide] :is(#Main, #x360-blades .x360-title, #x360-blades .x360-card) { animation-duration: .28s; }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide="out"] #Main > * { opacity: 0 !important; transition: opacity .07s linear !important; }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide="out"] .x360-profile-panel { opacity: 0; transition: opacity .07s linear; }
+.BasicUiRoot:not([data-x360-off])[data-x360-slide] #Main:has(.BrowserContainer) { animation: none !important; transform: none !important; }
+#x360-blades button:hover span { color: inherit; }
+#x360-blades button[data-x360-hot] span { color: #0c1319; text-shadow: 0 1px 0 #fff; }
+.BasicUiRoot:not([data-x360-off])[data-blade="1"]:not(:has(.x360-profile-panel)) { --x360-avatar: 0px; --x360-overlap: 0px; }

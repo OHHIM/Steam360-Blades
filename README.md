@@ -23,12 +23,19 @@ This theme recreates the look and feel of the iconic Blades dashboard, bringing 
   
 ### Installation
 
-1. Install Millennium if you haven't already.
-2. Download Xbox360-Blades Folder
-3. Put Xbox360-Blades folder inside of Themes folder usually located here C:\Program Files (x86)\Steam\millennium\themes
-4. Open Millennium and find the Xbox 360 Blades theme.
-5. Install and enable the theme.
-6. Restart Steam if prompted.
+**From the Millennium theme store (recommended)**
+
+1. Install [Millennium](https://steambrew.app/) if you haven't already.
+2. Find **Xbox 360 Blades** on [steambrew.app](https://steambrew.app/themes) or in Millennium's theme installer and install it.
+3. Enable the theme and restart Steam if prompted.
+
+Store installs update automatically when new versions are pushed.
+
+**Manually**
+
+1. Download this repository (Code → Download ZIP) and extract it.
+2. Put the extracted folder inside Millennium's themes folder, usually `C:\Program Files (x86)\Steam\millennium\themes`.
+3. Open Millennium, enable the Xbox 360 Blades theme and restart Steam if prompted.
 
 ## Screenshots
 

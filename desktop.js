@@ -87,7 +87,9 @@
 
   const SYSTEM = BLADES.findIndex(b => b.url);
   // ---------- Steam's other windows (dialogs, chat, settings, menus) ----------
-  const BASE = 'https://millennium.host/v1/themes/X360-Blades/';
+  // the theme's own folder, read from the tag Millennium injected this script with (store installs use the repo name, manual ones may not)
+  const BASE = (document.querySelector('script[src^="https://millennium.host/v1/themes/"][src$="/desktop.js"]')?.src
+    || 'https://millennium.host/v1/themes/Steam360-Blades/desktop.js').replace(/[^/]+$/, '');
   const POPUP_SHEETS = ['font.css', 'global.css', 'windows.css'];
   function popupWindows() {
     try {
@@ -108,7 +110,7 @@
       const head = doc.head || doc.documentElement;
       if (!head) return;
       for (const file of POPUP_SHEETS) {
-        if (doc.querySelector('[data-x360="' + file + '"], link[href*="X360-Blades/' + file + '"]')) continue;
+        if (doc.querySelector('[data-x360="' + file + '"], link[href="' + BASE + file + '"]')) continue;
         let el;
         if (sheetText[file]) { el = doc.createElement('style'); el.textContent = sheetText[file]; }
         else { el = doc.createElement('link'); el.rel = 'stylesheet'; el.href = BASE + file; }

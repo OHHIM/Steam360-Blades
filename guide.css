@@ -1,0 +1,247 @@
+html[data-x360-popup] body,
+html[data-x360-popup] body * {
+  font-family: "NXE Convection", "Segoe UI", sans-serif !important;
+}
+html[data-x360-popup], html[data-x360-popup] body,
+html[data-x360-popup] #browserview_target, #QuickAccess-NA { background: transparent !important; }
+#MainNavMenuContainer .Menu {
+  background: linear-gradient(100deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  border-radius: 0 14px 14px 0 !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset -5px 0 0 #7ab800 !important;
+  color: #1c282e !important;
+}
+#MainNavMenuContainer .Item {
+  margin: 2px 12px 2px 8px !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: #1c282e !important;
+}
+#MainNavMenuContainer .ActiveDot,
+#MainNavMenuContainer .Item::before,
+#MainNavMenuContainer .Item::after { display: none !important; }
+#MainNavMenuContainer .Item .ItemLabel,
+#MainNavMenuContainer .Item .ItemLabel * { color: #1c282e !important; font-size: 21px !important; }
+#MainNavMenuContainer .Item svg { color: #33454e !important; }
+#MainNavMenuContainer .Item:is(.gpfocus, :hover) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+#MainNavMenuContainer .Item:is(.gpfocus, :hover) :is(.ItemLabel, .ItemLabel *, svg) { color: #fff !important; }
+#QuickAccess-Menu.QuickAccessMenu {
+  background: linear-gradient(260deg, #f4f6f4, #c3ced2 70%, #aebbc0) !important;
+  border-radius: 14px 0 0 14px !important;
+  box-shadow: inset 0 0 0 1px #ffffffcc, inset 5px 0 0 #7ab800 !important;
+  color: #1c282e !important;
+}
+#QuickAccess-Menu :is(.Menu, .PanelOuterNav, .AllTabContents, .ContentTransition, .TabGroupPanel, .LoadingTemplate, .QuickAccessNotifications,
+  .FriendsListAndChatsSteamDeck, .friendsListContainer, .FriendsListContent, .friendlist, .friendlistListContainer, .friendListHeaderContainer,
+  .chatDialogs, .ChatRoomGroupDialog, .chatWindow, .chatBody, .chatHistory, .chatHistoryScroll, .displayColumn, .chatEntry, .chatStackPanel,
+  .multiChatDialog, .friendsContainer, .FriendsChatSection, .ChatHistorySelector, .FriendChatTypingNotification, .chatEntryControls,
+  [class*="FriendsListTab"], [class*="chatRoom"], [class*="ChatRoom"]) {
+  background: transparent !important;
+  background-image: none !important;
+}
+#QuickAccess-Menu .PanelOuterNav,
+#QuickAccess-Menu .PanelOuterNav * { color: #1c282e !important; text-shadow: none !important; }
+#QuickAccess-Menu .PanelOuterNav :is(.richPresenceLabel, .playerNickname, .gameName, [class*="Description"], [class*="Timestamp"], [class*="timestamp"]) { color: #4a5a63 !important; }
+#QuickAccess-Menu .PanelOuterNav .friend.online :is(.playerName, .gameName, .richPresenceLabel) { color: #3a7a00 !important; }
+#QuickAccess-Menu .PanelOuterNav .friend.ingame :is(.playerName, .gameName, .richPresenceLabel) { color: #2b6b00 !important; }
+#QuickAccess-Menu .PanelOuterNav [class*="Separator"], #QuickAccess-Menu .PanelOuterNav hr { background: #7c8a91 !important; border-color: #7c8a91 !important; }
+#QuickAccess-Menu :is(.friendsListContainer, .FriendsListContent, .friendlist) { box-shadow: inset -1px 0 0 #7c8a91 !important; }
+#QuickAccess-Menu .Tabs {
+  background: linear-gradient(100deg, #dfe5e7, #a3b0b6) !important;
+  margin-left: 5px !important;
+  box-shadow: inset -1px 0 0 #6f7b82 !important;
+}
+#QuickAccess-Menu .Tabs .Tab { background: transparent !important; color: #33454e !important; border-radius: 0 !important; }
+#QuickAccess-Menu .Tabs .Tab svg { color: #33454e !important; }
+#QuickAccess-Menu .Tabs .Tab.Selected {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, inset 0 -1px 0 #3c6a08 !important;
+}
+#QuickAccess-Menu .Tabs .Tab.Selected svg,
+#QuickAccess-Menu .Tabs .Tab.gpfocus svg { color: #fff !important; }
+#QuickAccess-Menu .Tabs .Tab.gpfocus { box-shadow: inset 0 0 0 2px #fff !important; }
+#QuickAccess-Menu .ContentTransition > .Title {
+  background: transparent !important;
+  margin: 0 14px 8px 12px !important;
+  padding: 4px 2px !important;
+  box-shadow: 0 1px 0 #7c8a91 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+}
+#QuickAccess-Menu [class*="PanelSectionTitle"], #QuickAccess-Menu [class*="SectionTitle"] { text-transform: none !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+#QuickAccess-Menu .Field, #QuickAccess-Menu [class*="PanelSectionRow"] { border-radius: 4px !important; }
+#QuickAccess-Menu .PanelOuterNav :is(.Field:is(.gpfocus, .gpfocuswithin), .friend:is(.gpfocus, :hover), .favoriteElement.gpfocus, .Focusable.gpfocus:not(.DialogButton):not(.chatTextarea):not(textarea)) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+  border-radius: 4px !important;
+}
+#QuickAccess-Menu .PanelOuterNav :is(.Field:is(.gpfocus, .gpfocuswithin), .friend:is(.gpfocus, :hover), .favoriteElement.gpfocus, .Focusable.gpfocus:not(.DialogButton):not(.chatTextarea):not(textarea)),
+#QuickAccess-Menu .PanelOuterNav :is(.Field:is(.gpfocus, .gpfocuswithin), .friend:is(.gpfocus, :hover), .favoriteElement.gpfocus, .Focusable.gpfocus:not(.DialogButton):not(.chatTextarea):not(textarea)) * {
+  color: #fff !important;
+}
+html[data-x360-popup="QuickAccess"] .DialogButton {
+  background: linear-gradient(#5d6b73, #353f45) !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 1px 0 #ffffff59, 0 1px 2px #0006 !important;
+}
+html[data-x360-popup="QuickAccess"] .DialogButton, html[data-x360-popup="QuickAccess"] .DialogButton * { color: #fff !important; }
+html[data-x360-popup="QuickAccess"] .DialogButton:is(.gpfocus, :hover) { background: linear-gradient(#a9d43c, #5a9612) !important; }
+#QuickAccess-Menu .favoriteElement .playerName {
+  margin-left: 0 !important; text-align: left !important; font-size: 16px !important;
+  flex: 1 1 auto !important; width: auto !important; max-width: none !important; min-width: 0 !important;
+  white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+}
+#QuickAccess-Menu .favoriteElement :is(.friend, .labelHolder) { flex: 1 1 auto !important; min-width: 0 !important; }
+#QuickAccess-Menu .favoriteElement .statusAndName { justify-content: flex-start !important; }
+#QuickAccess-Menu .avatarStatus.online, #QuickAccess-Menu .avatarHolder.online .avatarStatus { background: #7ab800 !important; }
+#QuickAccess-Menu :is(.chatHeader, .ChatTab) {
+  background: linear-gradient(#dfe5e7, #a3b0b6) !important;
+  border: 0 !important;
+  box-shadow: 0 1px 0 #6f7b82 !important;
+}
+#QuickAccess-Menu .ChatTab { box-shadow: none !important; }
+#QuickAccess-Menu .chatHeader::before, #QuickAccess-Menu .ChatTab::before { display: none !important; }
+#QuickAccess-Menu .chatTextarea, #QuickAccess-Menu .chatEntry textarea {
+  background: #ffffffd9 !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 0 0 1px #7c8a91, inset 0 2px 3px #0003 !important;
+}
+#QuickAccess-Menu .chatTextarea:is(.gpfocus, :focus-within) { box-shadow: inset 0 0 0 2px #7ab800 !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) svg:not(#x360-defs) :is(path, circle, rect, polygon, ellipse)[fill="currentColor"]:not([stroke]),
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) svg:not(#x360-defs):not([fill="none"]):not([stroke]) :is(path, circle, rect, polygon, ellipse):not([fill]):not([stroke]) {
+  fill: url(#x360-gloss-light) currentColor !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) svg:not(#x360-defs) { filter: drop-shadow(0 1px 1px #000000b3); }
+:is(#MainNavMenuContainer .Item:not(.gpfocus):not(:hover), #QuickAccess-Menu .Tabs .Tab:not(.Selected):not(.gpfocus), #QuickAccess-Menu .PanelOuterNav, .PagedSettingsDialog_PageListItem.Active:not(.gpfocus):not(:hover), .MenuButton:not(.gpfocus):not(:hover), .DialogButton:not(.gpfocus):not(:hover), .Tab.Selected:not(.gpfocus)) svg :is(path, circle, rect, polygon, ellipse) {
+  fill: url(#x360-gloss-dark) currentColor !important;
+}
+:is(#MainNavMenuContainer .Item:not(.gpfocus):not(:hover), #QuickAccess-Menu .Tabs .Tab:not(.Selected):not(.gpfocus), #QuickAccess-Menu .PanelOuterNav, .PagedSettingsDialog_PageListItem.Active:not(.gpfocus):not(:hover), .MenuButton:not(.gpfocus):not(:hover), .DialogButton:not(.gpfocus):not(:hover), .Tab.Selected:not(.gpfocus)) svg {
+  filter: drop-shadow(0 1px 0 #ffffffd9) !important;
+}
+#QuickAccess-Menu .PanelOuterNav :is(.gpfocus, .gpfocuswithin.Field, .DialogButton) svg :is(path, circle, rect, polygon, ellipse) {
+  fill: url(#x360-gloss-light) currentColor !important;
+}
+#QuickAccess-Menu .PanelOuterNav :is(.gpfocus, .gpfocuswithin.Field, .DialogButton) svg { filter: drop-shadow(0 1px 1px #000000b3) !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .Toggle .ToggleRail { background: linear-gradient(#20282d, #4a565d) !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff40 !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .Toggle.On .ToggleRail,
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .Toggle.On .ToggleRail::before { background: linear-gradient(#5a9612, #a9d43c) !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .Toggle .ToggleSwitch { background: linear-gradient(#ffffff, #b4bfc3) !important; box-shadow: 0 1px 3px #000a, inset 0 1px 0 #fff !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .Toggle.gpfocus .ToggleRail { box-shadow: 0 0 0 2px #fff, 0 0 10px #b6e84acc !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) :is(.BasicContextMenuContainer, .GamepadDialogOverlay .DialogContent) {
+ background:linear-gradient(100deg,#f4f6f4,#c3ced2 70%,#aebbc0) !important;
+ color:#1c282e !important;border-radius:10px !important;padding:8px !important;
+ box-shadow:inset 0 0 0 1px #fff,0 8px 28px #0007 !important;
+ font-family:Convection,"NXE Convection",sans-serif !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuContents {background:transparent !important;padding:4px !important;color:#1c282e !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem {background:transparent !important;color:#1c282e !important;border-radius:4px !important;box-shadow:none !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem:is(.gpfocus,:focus-visible,:hover) {background:linear-gradient(#a9d43c,#5a9612) !important;color:white !important;outline:none !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .ContextMenuSeparator {background:#7f9098 !important;height:1px !important;margin:5px 8px !important;box-shadow:0 1px #fff !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .ModalOverlayBackground {background:rgba(10,15,18,.60) !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .GamepadDialogOverlay input {background:#f7faf8 !important;color:#1c282e !important;border:1px solid #81949c !important;border-radius:5px !important;box-shadow:inset 0 1px 3px #0002 !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .BasicContextMenuContainer {max-height:78vh !important;box-sizing:border-box !important;min-width:320px;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuContents {max-height:calc(78vh - 16px) !important;box-sizing:border-box !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem .FilterContextOptionLabel {color:inherit !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuContents .SearchBar {position:sticky !important;top:0;z-index:2;background:#d8e0e2;padding-bottom:6px;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .GamepadDialogOverlay .CompatFilterDialog {background:linear-gradient(100deg,#f4f6f4,#c3ced2 70%,#aebbc0) !important;color:#1c282e !important;border-radius:10px;box-shadow:inset 0 0 0 1px #fff;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .CompatFilterDialog :is(.DialogHeader,.DialogBody,.FilterBucketLabel,.DialogCheckbox_Container) {color:#1c282e !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .CompatFilterDialog .FilterBucket {background:#ffffff50 !important;border-radius:4px;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .GamepadDialogOverlay input::placeholder {color:#52656f !important;opacity:1 !important;}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="clear"] { background: transparent !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="glass"] {
+  background: #ffffff14 !important;
+  box-shadow: inset 0 1px 0 #ffffff26 !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="track"] { background: #0a0f1280 !important; box-shadow: inset 0 1px 2px #000a, 0 1px 0 #ffffff26 !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="fill"] { background: linear-gradient(#b6e84a, #5a9612) !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="plate"] {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 2px #0006 !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-bg="field"] {
+  background: #0d131873 !important;
+  color: #fff !important;
+  box-shadow: inset 0 0 0 1px #ffffff33, inset 0 2px 3px #0006 !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) [data-x360-fg="accent"] { color: #c9f06a !important; }
+:is(.GamepadDialogOverlay .DialogContent, #QuickAccess-Menu, #MainNavMenuContainer) [data-x360-bg="glass"] { background: #1c282e14 !important; box-shadow: inset 0 0 0 1px #1c282e1f !important; }
+:is(.GamepadDialogOverlay .DialogContent, #QuickAccess-Menu, #MainNavMenuContainer) [data-x360-bg="field"] { background: #f7faf8 !important; color: #1c282e !important; box-shadow: inset 0 0 0 1px #81949c, inset 0 1px 3px #0002 !important; }
+:is(.GamepadDialogOverlay .DialogContent, #QuickAccess-Menu, #MainNavMenuContainer) [data-x360-bg="track"] { background: #1c282e40 !important; box-shadow: inset 0 1px 2px #0006 !important; }
+:is(.GamepadDialogOverlay .DialogContent, #QuickAccess-Menu, #MainNavMenuContainer) [data-x360-fg="accent"] { color: #3a7a00 !important; }
+.BasicUiRoot:not([data-x360-off]) :is(.DownloadsPage, .GamepadSearch, .ControllerConfiguratorMain, .ControllerConfiguratorMain .TopSection) { background: transparent !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) :is(*, *::placeholder):not(.DialogButton, .DialogButton *, .KeyCap, .KeyCap *, .Toggle *, input, textarea) {
+  color: #1c282e !important;
+  text-shadow: none !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) .DialogHeader,
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) .DialogHeader * {
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) a { color: #2b6b00 !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) :is(input, textarea) {
+  background: #f7faf8 !important;
+  color: #1c282e !important;
+  border-radius: 5px !important;
+  box-shadow: inset 0 0 0 1px #81949c, inset 0 1px 3px #0002 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) :is(input, textarea):is(.gpfocus, :focus) { box-shadow: inset 0 0 0 2px #7ab800 !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) .Field.Background { background: #1c282e14 !important; box-shadow: inset 0 0 0 1px #1c282e1f !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) svg { filter: drop-shadow(0 1px 0 #ffffffd9) !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) svg :is(path, circle, rect, polygon, ellipse)[fill="currentColor"] { fill: url(#x360-gloss-dark) currentColor !important; }
+.BasicUiRoot:not([data-x360-off]) .CompatFilterOptions .Panel:has(> .RadioButton) { border-radius: 4px !important; margin-bottom: 2px !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .CompatFilterOptions .Panel:has(> .RadioButton):is(.Active, .gpfocus) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .CompatFilterDialog .CompatFilterOptions .Panel:has(> .RadioButton):is(.Active, .gpfocus) *:not(.RadioButton) { color: #fff !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .RadioButton {
+  background: linear-gradient(#ffffff, #cfd9dd) !important;
+  border-color: #6f7b82 !important;
+  box-shadow: inset 0 1px 2px #0004 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.Active, .Selected) > .RadioButton,
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .RadioButton:is(.Active, .Selected) {
+  background: radial-gradient(circle, #3c6a08 0 36%, #ffffff 42%) !important;
+  border-color: #3c6a08 !important;
+}
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .DialogCheckbox { background: linear-gradient(#ffffff, #cfd9dd) !important; box-shadow: inset 0 0 0 1px #6f7b82, inset 0 1px 2px #0003 !important; border-radius: 3px !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .DialogCheckbox:is(.Active, .Checked) { background: linear-gradient(#a9d43c, #5a9612) !important; }
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay .DialogCheckbox svg { filter: none !important; }
+.BasicUiRoot:not([data-x360-off]) .DialogButton:not(.gpfocus):not(:hover):not(:focus-visible),
+.BasicUiRoot:not([data-x360-off]) .DialogButton:not(.gpfocus):not(:hover):not(:focus-visible) * { color: #1c282e !important; text-shadow: none !important; }
+.BasicUiRoot:not([data-x360-off]) .DialogButton:not(.gpfocus):not(:hover):not(:focus-visible) :is(.Details, .DropDownLabelTitle + div, [class*="Description"]) { color: #4a5a63 !important; }
+.BasicUiRoot:not([data-x360-off]) .DialogButton:is(.gpfocus, :hover, :focus-visible) * { color: #fff !important; }
+.BasicUiRoot:not([data-x360-off]) .DialogButton.Disabled, .BasicUiRoot:not([data-x360-off]) .DialogButton:disabled { opacity: .55 !important; }
+#QuickAccess-Menu :is(.favoriteElement, .friendsContainer, .groupList) .friend { padding-right: 12px !important; box-sizing: border-box !important; }
+#QuickAccess-Menu .friendlist .groupName { padding-right: 12px !important; box-sizing: border-box !important; }
+#QuickAccess-Menu .TabBumper img { filter: drop-shadow(0 0 1px #1c282e) drop-shadow(0 1px 1px #0009) !important; }
+.BasicUiRoot:not([data-x360-off]) [data-x360-fg="dim"] { color: #e3e9eb !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) :is([data-x360-bg="focus"], [data-x360-hover]:hover) {
+  background: linear-gradient(#a9d43c, #5a9612) !important;
+  box-shadow: inset 0 1px 0 #d9f59a, 0 1px 3px #0006 !important;
+  border-radius: 4px !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) :is([data-x360-bg="focus"], [data-x360-hover]:hover),
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) :is([data-x360-bg="focus"], [data-x360-hover]:hover) *,
+#QuickAccess-Menu .PanelOuterNav :is([data-x360-bg="focus"], [data-x360-hover]:hover),
+#QuickAccess-Menu .PanelOuterNav :is([data-x360-bg="focus"], [data-x360-hover]:hover) *,
+.BasicUiRoot:not([data-x360-off]) .FullModalOverlay :is(.DialogContent, .CompatFilterDialog) :is([data-x360-bg="focus"], [data-x360-hover]:hover) :is(*, *::placeholder):not(.DialogButton, .DialogButton *, .KeyCap, .KeyCap *, .Toggle *, input, textarea) {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem:not(.gpfocus, :focus-visible, :hover) * { color: #1c282e !important; text-shadow: none !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem:not(.gpfocus, :focus-visible, :hover) :is([class*="Description"], [class*="SubTitle"], [class*="Subtitle"], div + div) { color: #4a5a63 !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem:is(.gpfocus, :focus-visible, :hover) * { color: #fff !important; text-shadow: none !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) .contextMenuItem.Disabled { opacity: .5 !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) svg:has(.Background):not(#x360-defs) :is(path, circle, rect, polygon, ellipse, text):not(.Background):not(#x360-defs) { fill: #22303a !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) svg:has(.Background):not(#x360-defs) .Background:not(#x360-defs) { fill: url(#x360-gloss-light) #e9eef0 !important; }
+.BasicUiRoot:not([data-x360-off]) .DownloadsPage .TopSection:has(> .Section.Empty) { height: auto !important; min-height: calc(56 * var(--u)) !important; flex: 0 0 auto !important; }
+.BasicUiRoot:not([data-x360-off]) .DownloadsPage .TopSection > .Section.Empty { display: none !important; }
+.BasicUiRoot:not([data-x360-off]) .DownloadsPage .TopSection:has(> .Section.Empty) .RemoteClientManagementRow { position: relative !important; inset: auto !important; margin: calc(14 * var(--u)) calc(12 * var(--u)) !important; }
+.BasicUiRoot:not([data-x360-off]) .DownloadsPage .RemoteClientManagementBackground { background: #0a0f1280 !important; border-radius: 4px !important; }
+:is(.BasicUiRoot:not([data-x360-off]), html[data-x360-popup]) :is([data-x360-bg="focus"], [data-x360-hover]:hover) :not(img, video, canvas, .Toggle, .Toggle *, .DialogButton) { background-color: transparent !important; }
