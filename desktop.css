@@ -30,7 +30,34 @@ body.x360d .OuterFrame > :not(#x360-blades) { position: relative; z-index: 1; }
 /* ---------- blades ---------- */
 #x360-blades { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 #x360-blades[hidden] { display: none !important; }
-body.x360d #x360-blades { background: var(--x360-bg) center / 100% 100% no-repeat; }
+/* behind the blades: a neutral grey, slightly see-through so the blade colour barely shows through */
+body.x360d #x360-blades {
+  background:
+    linear-gradient(90deg, #b4b4b4e3 40%, #dcdcdce3 60%),
+    var(--x360-bg) center / 100% 100% no-repeat;
+}
+/* the open blade's colour, only between the open blade's curve and the first right blade's curve */
+body.x360d #x360-blades::before {
+  --x360-rc: min(1, var(--x360-right-count));
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: calc(-36 * 100vh / 770);
+  height: calc(940 * 100vh / 770);
+  left: calc(var(--x360-left-count) * var(--step));
+  right: calc(max(0, var(--x360-right-count) - 1) * var(--step));
+  background: var(--x360-bg) center / 100% 100% no-repeat;
+  -webkit-mask:
+    url("blades-assets/blade_left_inside.svg") left top / calc(136 * var(--u)) 100% no-repeat,
+    linear-gradient(#000 0 0) calc(136 * var(--u) - 1px) 0 / calc(100% - (136 + 161 * var(--x360-rc)) * var(--u) + 2px) 100% no-repeat,
+    url("blades-assets/blade_right_inside.svg") right top / calc(161 * var(--x360-rc) * var(--u)) 100% no-repeat;
+  mask:
+    url("blades-assets/blade_left_inside.svg") left top / calc(136 * var(--u)) 100% no-repeat,
+    linear-gradient(#000 0 0) calc(136 * var(--u) - 1px) 0 / calc(100% - (136 + 161 * var(--x360-rc)) * var(--u) + 2px) 100% no-repeat,
+    url("blades-assets/blade_right_inside.svg") right top / calc(161 * var(--x360-rc) * var(--u)) 100% no-repeat;
+  transition: left .3s cubic-bezier(.2, .7, .2, 1), right .3s cubic-bezier(.2, .7, .2, 1);
+  pointer-events: none;
+}
 #x360-blades > button,
 #x360-blades > .x360-jewel {
   position: absolute;
@@ -74,14 +101,10 @@ body.x360d #x360-blades > .x360-jewel { background-image: url("blades-assets/bla
 }
 #x360-blades > .x360-jewel span {
   font: 400 calc(24 * var(--u)) / 1 var(--x360-font);
-  color: var(--x360-tab-ink, #00000099);
-  text-shadow: 0 1px 0 #ffffffd9;
+  color: #000000a6;
+  /* see-through black so it takes on the blade colour; no white rim like the other tabs */
+  text-shadow: none !important;
 }
-body.x360d[data-blade="1"] { --x360-tab-ink: #6b3200; }
-body.x360d[data-blade="2"] { --x360-tab-ink: #1d5200; }
-body.x360d[data-blade="3"] { --x360-tab-ink: #0b2f70; }
-body.x360d[data-blade="4"] { --x360-tab-ink: #33176e; }
-body.x360d[data-blade="5"] { --x360-tab-ink: #6e1608; }
 #x360-blades > :is(button, .x360-jewel) span {
   position: absolute;
   left: 50%; top: 23%;
